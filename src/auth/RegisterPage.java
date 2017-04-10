@@ -88,10 +88,23 @@ public class RegisterPage {
 		JButton btnSubmit = new JButton("");
 		btnSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				int dialogResult = JOptionPane.showConfirmDialog(null, "Are you sure the input is correct?");
+				int dialogResult = JOptionPane.showConfirmDialog(null, "Are you sure the input is correct?", 
+						"Confirmation", JOptionPane.YES_NO_OPTION);
+				
 				if (dialogResult == JOptionPane.YES_OPTION) {
-					UserManagement.registerUser(usernameField.getText(), passwordField.getPassword(), 
-							fullnameField.getText(), positionBox.getSelectedItem().toString());
+					int registerResult = UserManagement.registerUser(usernameField.getText(), 
+							passwordField.getPassword(), fullnameField.getText(), 
+							positionBox.getSelectedItem().toString());
+					
+					if (registerResult == UserManagement.EMPTY_FIELD) {
+						JOptionPane.showMessageDialog(null, "All fields must be filled.");
+					} else if (registerResult == UserManagement.USERNAME_ALREADY_EXISTS) {
+						JOptionPane.showMessageDialog(null, "Username already exists.");
+					} else if (registerResult == UserManagement.PASSWORD_TOO_SHORT) {
+						JOptionPane.showMessageDialog(null, "Password must be at least 6 characters.");
+					} else if (registerResult == UserManagement.REGISTER_SUCCESS) {
+						JOptionPane.showMessageDialog(null, "Registration success!");
+					}
 				}
 			}
 		});

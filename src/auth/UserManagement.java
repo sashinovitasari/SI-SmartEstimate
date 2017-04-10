@@ -6,12 +6,15 @@ import db.DBController;
 
 public class UserManagement {
 	
-	public static int USERNAME_ALREADY_EXISTS = 100;
-	public static int PASSWORD_TOO_SHORT = 200;
+	public static int USERNAME_ALREADY_EXISTS = 1;
+	public static int PASSWORD_TOO_SHORT = 2;
+	public static int EMPTY_FIELD = 3;
 	public static int REGISTER_SUCCESS = 0;
 
 	public static int registerUser(String username, char[] password, String fullname, String position) {
-		if (matchUserID(username)) {
+		if (username.matches("") || password.length == 0 || fullname.matches("")) {
+			return EMPTY_FIELD;
+		} else if (matchUserID(username)) {
 			return USERNAME_ALREADY_EXISTS;
 		} else if (password.length < 6) {
 			return PASSWORD_TOO_SHORT;
