@@ -1,2 +1,5 @@
 # Pastekan seluruh sql query untuk merubah skema basis data disini
 ALTER TABLE user ADD position char(1);
+ALTER TABLE user DROP COLUMN email;
+ALTER TABLE user ADD username varchar(255);
+ALTER TABLE user MODIFY ID_user INT PRIMARY KEY AUTO_INCREMENT;

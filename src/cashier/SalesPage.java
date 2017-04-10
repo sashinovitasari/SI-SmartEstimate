@@ -14,7 +14,7 @@ import javax.swing.SwingConstants;
 
 import com.toedter.calendar.JDateChooser;
 
-import auth.AuthController;
+import auth.UserManagement;
 import auth.LoginPage;
 import estimation.EstimationPage;
 import javax.swing.JTextField;

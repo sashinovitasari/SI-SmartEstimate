@@ -77,7 +77,7 @@ public class LoginPage {
 		btnLogin = new JButton("");
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				AuthController.login(usernameField.getText(), passwordField.getPassword());
+				UserManagement.login(usernameField.getText(), passwordField.getPassword());
 			}
 		});
 		btnLogin.setIcon(new ImageIcon(LoginPage.class.getResource("/img_btn/login_btn.png")));

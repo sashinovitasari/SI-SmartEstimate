@@ -90,7 +90,7 @@ public class RegisterPage {
 			public void actionPerformed(ActionEvent arg0) {
 				int dialogResult = JOptionPane.showConfirmDialog(null, "Are you sure the input is correct?");
 				if (dialogResult == JOptionPane.YES_OPTION) {
-					AuthController.register(usernameField.getText(), passwordField.getPassword(), 
+					UserManagement.registerUser(usernameField.getText(), passwordField.getPassword(), 
 							fullnameField.getText(), positionBox.getSelectedItem().toString());
 				}
 			}
