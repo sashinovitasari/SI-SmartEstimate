@@ -81,6 +81,11 @@ public class SalesPage {
 		panel.add(inputDate);
 		
 		btnSave = new JButton("");
+		btnSave.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 		btnSave.setIcon(new ImageIcon(SalesPage.class.getResource("/img_btn/save_btn.png")));
 		btnSave.setBounds(728, 540, 125, 57);
 		panel.add(btnSave);
