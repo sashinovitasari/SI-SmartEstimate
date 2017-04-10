@@ -1,6 +1,7 @@
 package auth;
 
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -13,11 +14,18 @@ import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
+import javax.swing.JTextField;
+import javax.swing.JPasswordField;
+import javax.swing.JButton;
 
 public class LoginPage {
 	
 
 	private JFrame frame;
+	private JTextField usernameField;
+	private JPasswordField passwordField;
+	private JButton btnLogin;
+	private JButton button;
 
 	/**
 	 * Launch the application.
@@ -53,6 +61,26 @@ public class LoginPage {
 		JPanel panel = new JPanel();
 		frame.getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
+		
+		usernameField = new JTextField();
+		usernameField.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		usernameField.setBounds(341, 272, 471, 37);
+		panel.add(usernameField);
+		usernameField.setColumns(10);
+		
+		passwordField = new JPasswordField();
+		passwordField.setBounds(341, 330, 471, 37);
+		panel.add(passwordField);
+		
+		btnLogin = new JButton("");
+		btnLogin.setIcon(new ImageIcon(LoginPage.class.getResource("/img_btn/login_btn.png")));
+		btnLogin.setBounds(687, 446, 125, 57);
+		panel.add(btnLogin);
+		
+		button = new JButton("");
+		button.setIcon(new ImageIcon(LoginPage.class.getResource("/img_btn/register_btn.png")));
+		button.setBounds(555, 446, 125, 57);
+		panel.add(button);
 		
 		JLabel border = new JLabel("");
 		border.setHorizontalAlignment(SwingConstants.CENTER);
