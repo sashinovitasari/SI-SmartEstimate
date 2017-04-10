@@ -9,7 +9,9 @@ public class UserManagement {
 	public static int USERNAME_ALREADY_EXISTS = 1;
 	public static int PASSWORD_TOO_SHORT = 2;
 	public static int EMPTY_FIELD = 3;
+	public static int AUTHENTICATION_FAILED = 4;
 	public static int REGISTER_SUCCESS = 0;
+	public static int LOGIN_SUCCESS = 0;
 
 	public static int registerUser(String username, char[] password, String fullname, String position) {
 		if (username.matches("") || password.length == 0 || fullname.matches("")) {
@@ -29,9 +31,17 @@ public class UserManagement {
 		return REGISTER_SUCCESS;
 	}
 	
-	public static void login(String username, char[] password) {
-		System.out.println(username);
-		System.out.println(password);
+	public static int doLogin(String username, char[] password) {
+		if (username.matches("") || password.length == 0) {
+			return EMPTY_FIELD;
+		} else if (validateUser(username, password)) {
+			String query = "UPDATE user SET login_state = 1 WHERE username = '" + username 
+					+ "' AND password = '" + String.valueOf(password) + "'";
+			DBController.queryDatabase(query);
+			return LOGIN_SUCCESS;
+		} else {
+			return AUTHENTICATION_FAILED;
+		}
 	}
 	
 	public static void logout() {
@@ -52,5 +62,22 @@ public class UserManagement {
 			e.printStackTrace();
 		}
 		return false;
+	}
+	
+	private static boolean validateUser(String username, char[] password) {
+		String query = "SELECT * FROM user WHERE username = '" + username 
+				+ "' AND password = '" + String.valueOf(password) + "'";
+		ResultSet rs = DBController.queryDatabase(query);
+		
+		try {
+			if(rs.next()) {
+				return true;
+			} else {
+				return false;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return true;
 	}
 }

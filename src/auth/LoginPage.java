@@ -12,6 +12,7 @@ import java.awt.Color;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
@@ -77,7 +78,14 @@ public class LoginPage {
 		btnLogin = new JButton("");
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				UserManagement.login(usernameField.getText(), passwordField.getPassword());
+				int loginResult = UserManagement.doLogin(usernameField.getText(), passwordField.getPassword());
+				if (loginResult == UserManagement.LOGIN_SUCCESS) {
+					JOptionPane.showMessageDialog(null, "Authentication successful!");
+				} else if (loginResult == UserManagement.AUTHENTICATION_FAILED) {
+					JOptionPane.showMessageDialog(null, "Username or/and password doesn't match.");
+				} else if (loginResult == UserManagement.EMPTY_FIELD) {
+					JOptionPane.showMessageDialog(null, "All fields must be filled.");
+				}
 			}
 		});
 		btnLogin.setIcon(new ImageIcon(LoginPage.class.getResource("/img_btn/login_btn.png")));

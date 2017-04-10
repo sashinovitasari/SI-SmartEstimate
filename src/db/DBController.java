@@ -49,7 +49,6 @@ public class DBController {
 			} else {
 				ps = conn.prepareStatement(query);
 				ps.executeUpdate(query);
-				rs = ps.getGeneratedKeys();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
