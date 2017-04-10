@@ -17,6 +17,8 @@ import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class LoginPage {
 	
@@ -73,6 +75,11 @@ public class LoginPage {
 		panel.add(passwordField);
 		
 		btnLogin = new JButton("");
+		btnLogin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				AuthController.login(usernameField.getText(), passwordField.getPassword());
+			}
+		});
 		btnLogin.setIcon(new ImageIcon(LoginPage.class.getResource("/img_btn/login_btn.png")));
 		btnLogin.setBounds(687, 446, 125, 57);
 		panel.add(btnLogin);

@@ -7,6 +7,7 @@ import java.awt.EventQueue;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
@@ -15,6 +16,8 @@ import javax.swing.DefaultComboBoxModel;
 import java.awt.Font;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class RegisterPage {
 
@@ -83,6 +86,15 @@ public class RegisterPage {
 		panel.add(positionBox);
 		
 		JButton btnSubmit = new JButton("");
+		btnSubmit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int dialogResult = JOptionPane.showConfirmDialog(null, "Are you sure the input is correct?");
+				if (dialogResult == JOptionPane.YES_OPTION) {
+					AuthController.register(usernameField.getText(), passwordField.getPassword(), 
+							fullnameField.getText(), positionBox.getSelectedItem().toString());
+				}
+			}
+		});
 		btnSubmit.setIcon(new ImageIcon(RegisterPage.class.getResource("/img_btn/submit_btn.png")));
 		btnSubmit.setBounds(687, 446, 125, 57);
 		panel.add(btnSubmit);
