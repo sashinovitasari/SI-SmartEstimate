@@ -8,11 +8,13 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import com.toedter.calendar.JDateChooser;
 
+import auth.AuthController;
 import auth.LoginPage;
 import estimation.EstimationPage;
 import javax.swing.JTextField;
@@ -83,7 +85,14 @@ public class SalesPage {
 		btnSave = new JButton("");
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				int dialogResult = JOptionPane.showConfirmDialog(null, "Are you sure the input is correct?", "Confirmation", JOptionPane.YES_NO_OPTION);
+				if (dialogResult == JOptionPane.YES_OPTION) {
+					SalesController.addToDatabase(0, inputDate.getDate(), 
+							Integer.parseInt(item_1.getText()), Integer.parseInt(item_2.getText()), 
+							Integer.parseInt(item_3.getText()), Integer.parseInt(item_4.getText()), 
+							Integer.parseInt(item_5.getText()));
+					JOptionPane.showMessageDialog(null, "Sales entry has been inserted successfully!", "Notification", JOptionPane.INFORMATION_MESSAGE);
+				}
 			}
 		});
 		btnSave.setIcon(new ImageIcon(SalesPage.class.getResource("/img_btn/save_btn.png")));

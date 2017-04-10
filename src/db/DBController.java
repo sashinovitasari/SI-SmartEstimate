@@ -37,9 +37,20 @@ public class DBController {
 	public static ResultSet queryDatabase(String query) {
 		ResultSet rs = null;
 		Connection conn = connectDatabase();
+		PreparedStatement ps;
 		try {
-			Statement st = conn.createStatement();
-			rs = st.executeQuery(query);
+			if (query.startsWith("SELECT")) {
+				ps = conn.prepareStatement(query);
+				rs = ps.executeQuery(query);
+			} else if (query.startsWith("INSERT")){
+				ps = conn.prepareStatement(query);
+				ps.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
+				rs = ps.getGeneratedKeys();
+			} else {
+				ps = conn.prepareStatement(query);
+				ps.executeUpdate(query);
+				rs = ps.getGeneratedKeys();
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
