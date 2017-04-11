@@ -3,6 +3,8 @@ package estimation;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -13,12 +15,15 @@ import javax.swing.SwingConstants;
 import com.toedter.calendar.JCalendar;
 import com.toedter.calendar.JDateChooser;
 
+import order.PageOrder;
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 
 public class EstimationPage {
 
 	private JFrame frame;
+	private JButton dashboardButton;
 
 	/**
 	 * Launch the application.
@@ -50,6 +55,18 @@ public class EstimationPage {
 		frame = new JFrame();
 		frame.setResizable(false);
 		frame.getContentPane().setBackground(Color.WHITE);
+		
+		dashboardButton = new JButton();
+		dashboardButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//close window or return to dashboard
+				frame.setVisible(false); //you can't see me!
+				frame.dispose(); //Destroy the JFrame object
+			}
+		});
+		dashboardButton.setIcon(new ImageIcon(PageOrder.class.getResource("/img_btn/dashboard_btn.png")));
+		dashboardButton.setBounds(825, 40, 125, 57);
+		frame.getContentPane().add(dashboardButton);
 		
 		JPanel panel = new JPanel();
 		frame.getContentPane().add(panel, BorderLayout.CENTER);
