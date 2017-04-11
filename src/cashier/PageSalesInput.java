@@ -15,7 +15,6 @@ import javax.swing.SwingConstants;
 import com.toedter.calendar.JDateChooser;
 
 import auth.UserManagement;
-import estimation.EstimationPage;
 import javax.swing.JTextField;
 import java.awt.Font;
 import java.awt.event.ActionListener;
@@ -255,7 +254,7 @@ public class PageSalesInput {
 		
 		JLabel border = new JLabel("");
 		border.setHorizontalAlignment(SwingConstants.CENTER);
-		border.setIcon(new ImageIcon(EstimationPage.class.getResource("/img_pages/SalesPage.png")));
+		border.setIcon(new ImageIcon(PageSalesInput.class.getResource("/img_pages/SalesPage.png")));
 		border.setBounds(0, 0, 994, 621);
 		panel.add(border);
 		
