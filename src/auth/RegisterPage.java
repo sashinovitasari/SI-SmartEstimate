@@ -1,6 +1,7 @@
 package auth;
 
 import java.awt.BorderLayout;
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
 
@@ -19,9 +20,9 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class RegisterPage {
+public class RegisterPage extends JPanel {
 
-	private JFrame frame;
+	private static final long serialVersionUID = -527887441165306537L;
 	private JTextField usernameField;
 	private JTextField fullnameField;
 	private JPasswordField passwordField;
@@ -34,11 +35,29 @@ public class RegisterPage {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					RegisterPage window = new RegisterPage();
-					window.frame.setVisible(true);
+					JFrame frame = new JFrame();
+					RegisterPage panel = new RegisterPage();
+					
+					frame.setResizable(false);
+					frame.getContentPane().setBackground(Color.WHITE);
+					frame.getContentPane().add(panel, BorderLayout.CENTER);
+					frame.setBounds(0, 0, 1000, 650);
+					frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+					
+					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
+			}
+		});
+	}
+	
+	public void setButtonActionListener(JPanel cards, String id) {
+		btnCancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				//change to confirm page
+				CardLayout cl = (CardLayout)(cards.getLayout());
+		        cl.show(cards, id);
 			}
 		});
 	}
@@ -54,36 +73,30 @@ public class RegisterPage {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setResizable(false);
-		frame.getContentPane().setBackground(Color.WHITE);
-		
-		JPanel panel = new JPanel();
-		frame.getContentPane().add(panel, BorderLayout.CENTER);
-		panel.setLayout(null);
+		this.setLayout(null);
 		
 		usernameField = new JTextField();
 		usernameField.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		usernameField.setBounds(341, 208, 471, 37);
-		panel.add(usernameField);
+		this.add(usernameField);
 		usernameField.setColumns(10);
 		
 		passwordField = new JPasswordField();
 		passwordField.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		passwordField.setBounds(341, 259, 471, 37);
-		panel.add(passwordField);
+		this.add(passwordField);
 		
 		fullnameField = new JTextField();
 		fullnameField.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		fullnameField.setColumns(10);
 		fullnameField.setBounds(341, 315, 471, 37);
-		panel.add(fullnameField);
+		this.add(fullnameField);
 		
-		JComboBox positionBox = new JComboBox();
+		JComboBox<String> positionBox = new JComboBox<String>();
 		positionBox.setFont(new Font("Tahoma", Font.BOLD, 18));
-		positionBox.setModel(new DefaultComboBoxModel(new String[] {"Store Manager", "Cashier"}));
+		positionBox.setModel(new DefaultComboBoxModel<String>(new String[] {"Store Manager", "Cashier"}));
 		positionBox.setBounds(341, 368, 471, 37);
-		panel.add(positionBox);
+		this.add(positionBox);
 		
 		JButton btnSubmit = new JButton("");
 		btnSubmit.addActionListener(new ActionListener() {
@@ -110,19 +123,17 @@ public class RegisterPage {
 		});
 		btnSubmit.setIcon(new ImageIcon(RegisterPage.class.getResource("/img_btn/submit_btn.png")));
 		btnSubmit.setBounds(687, 446, 125, 57);
-		panel.add(btnSubmit);
+		this.add(btnSubmit);
 		
 		btnCancel = new JButton("");
 		btnCancel.setIcon(new ImageIcon(RegisterPage.class.getResource("/img_btn/cancel_btn.png")));
 		btnCancel.setBounds(552, 446, 125, 57);
-		panel.add(btnCancel);
+		this.add(btnCancel);
 		
 		JLabel border = new JLabel("");
 		border.setHorizontalAlignment(SwingConstants.CENTER);
 		border.setIcon(new ImageIcon(RegisterPage.class.getResource("/img_pages/RegisterPage.png")));
 		border.setBounds(0, 0, 994, 621);
-		panel.add(border);
-		frame.setBounds(0, 0, 1000, 650);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.add(border);
 	}
 }
