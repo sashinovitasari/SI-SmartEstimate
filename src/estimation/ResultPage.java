@@ -18,6 +18,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import order.OrderController;
+import order.PageOrder;
+
 public class ResultPage {
 
 	private JFrame frame;
@@ -43,6 +46,7 @@ public class ResultPage {
 	private JLabel amount3;
 	private JLabel amount4;
 	private JLabel amount5;
+	private JButton dashboardButton;
 	
 	private JPanel orderPanel;
 	private JPanel confirmPanel;
@@ -114,14 +118,23 @@ public class ResultPage {
 		btnSave = new JButton("");
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//change to confirm page
-				CardLayout cl = (CardLayout)(cards.getLayout());
-		        cl.show(cards, CONFIRMPANEL);
-		        amount1.setText(item_1.getText());
-		        amount2.setText(item_2.getText());
-		        amount3.setText(item_3.getText());
-		        amount4.setText(item_4.getText());
-		        amount5.setText(item_5.getText());
+				String string1 = item_1.getText();
+				String string2 = item_2.getText();
+				String string3 = item_3.getText();
+				String string4 = item_4.getText();
+				String string5 = item_5.getText();
+				if (ResultController.isInputValid(string1,string2,string3,string4,string5)) {
+					//change to confirm page
+					CardLayout cl = (CardLayout)(cards.getLayout());
+			        cl.show(cards, CONFIRMPANEL);
+			        amount1.setText(item_1.getText());
+			        amount2.setText(item_2.getText());
+			        amount3.setText(item_3.getText());
+			        amount4.setText(item_4.getText());
+			        amount5.setText(item_5.getText());
+				} else {
+					JOptionPane.showMessageDialog(null, "All fields must be a positive number!");
+				}
 			}
 		});
 		btnSave.setIcon(new ImageIcon(ResultPage.class.getResource("/img_btn/save_btn.png")));
@@ -137,7 +150,8 @@ public class ResultPage {
 		dec_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Integer val = Integer.parseInt(item_1.getText());
-				val--; item_1.setText(val.toString());
+				if (val <= 0) val = 0; else val--;
+				item_1.setText(val.toString());
 			}
 		});
 		dec_1.setIcon(new ImageIcon(ResultPage.class.getResource("/img_btn/dec_btn.png")));
@@ -148,7 +162,8 @@ public class ResultPage {
 		dec_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Integer val = Integer.parseInt(item_2.getText());
-				val--; item_2.setText(val.toString());
+				if (val <= 0) val = 0; else val--;
+				item_2.setText(val.toString());
 			}
 		});
 		dec_2.setIcon(new ImageIcon(ResultPage.class.getResource("/img_btn/dec_btn.png")));
@@ -159,7 +174,8 @@ public class ResultPage {
 		dec_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Integer val = Integer.parseInt(item_3.getText());
-				val--; item_3.setText(val.toString());
+				if (val <= 0) val = 0; else val--;
+				item_3.setText(val.toString());
 			}
 		});
 		dec_3.setIcon(new ImageIcon(ResultPage.class.getResource("/img_btn/dec_btn.png")));
@@ -170,7 +186,8 @@ public class ResultPage {
 		dec_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Integer val = Integer.parseInt(item_4.getText());
-				val--; item_4.setText(val.toString());
+				if (val <= 0) val = 0; else val--;
+				item_4.setText(val.toString());
 			}
 		});
 		dec_4.setIcon(new ImageIcon(ResultPage.class.getResource("/img_btn/dec_btn.png")));
@@ -181,7 +198,8 @@ public class ResultPage {
 		dec_5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Integer val = Integer.parseInt(item_5.getText());
-				val--; item_5.setText(val.toString());
+				if (val <= 0) val = 0; else val--;
+				item_5.setText(val.toString());
 			}
 		});
 		dec_5.setIcon(new ImageIcon(ResultPage.class.getResource("/img_btn/dec_btn.png")));
@@ -305,7 +323,10 @@ public class ResultPage {
 							Integer.parseInt(amount3.getText()),
 							Integer.parseInt(amount4.getText()), 
 							Integer.parseInt(amount5.getText()));
-					
+					JOptionPane.showMessageDialog(null, "Order entry has been inserted successfully!", "Notification", JOptionPane.INFORMATION_MESSAGE);
+					//close window or return to dashboard
+					frame.setVisible(false); //you can't see me!
+					frame.dispose(); //Destroy the JFrame object
 				}
 			}
 		});
@@ -348,6 +369,18 @@ public class ResultPage {
 		frame.getContentPane().setBackground(Color.WHITE);
 		
 		cards = new JPanel(new CardLayout());
+		
+		dashboardButton = new JButton();
+		dashboardButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//close window or return to dashboard
+				frame.setVisible(false); //you can't see me!
+				frame.dispose(); //Destroy the JFrame object
+			}
+		});
+		dashboardButton.setIcon(new ImageIcon(PageOrder.class.getResource("/img_btn/dashboard_btn.png")));
+		dashboardButton.setBounds(825, 40, 125, 57);
+		frame.getContentPane().add(dashboardButton);
 		
 		initOrderPanel();
 		initConfirmPanel();

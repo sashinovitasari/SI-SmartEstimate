@@ -47,4 +47,18 @@ public class ResultController {
 
 	}
 
+	public static boolean isInputValid(String string1, String string2, String string3, String string4, String string5) {
+		try {
+			int int1 = Integer.parseInt(string1);
+			int int2 = Integer.parseInt(string2);
+			int int3 = Integer.parseInt(string3);
+			int int4 = Integer.parseInt(string4);
+			int int5 = Integer.parseInt(string5);
+			
+			return (int1 >= 0) && (int2 >= 0) && (int3 >= 0) && (int4 >= 0) && (int5 >= 0);
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
 }

@@ -43,6 +43,7 @@ public class PageOrder {
 	private JLabel amount3;
 	private JLabel amount4;
 	private JLabel amount5;
+	private JButton dashboardButton;
 	
 	private JPanel orderPanel;
 	private JPanel confirmPanel;
@@ -114,14 +115,23 @@ public class PageOrder {
 		btnSave = new JButton("");
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//change to confirm page
-				CardLayout cl = (CardLayout)(cards.getLayout());
-		        cl.show(cards, CONFIRMPANEL);
-		        amount1.setText(item_1.getText());
-		        amount2.setText(item_2.getText());
-		        amount3.setText(item_3.getText());
-		        amount4.setText(item_4.getText());
-		        amount5.setText(item_5.getText());
+				String string1 = item_1.getText();
+				String string2 = item_2.getText();
+				String string3 = item_3.getText();
+				String string4 = item_4.getText();
+				String string5 = item_5.getText();
+				if (OrderController.isInputValid(string1,string2,string3,string4,string5)) {
+					//change to confirm page
+					CardLayout cl = (CardLayout)(cards.getLayout());
+			        cl.show(cards, CONFIRMPANEL);
+			        amount1.setText(item_1.getText());
+			        amount2.setText(item_2.getText());
+			        amount3.setText(item_3.getText());
+			        amount4.setText(item_4.getText());
+			        amount5.setText(item_5.getText());
+				} else {
+					JOptionPane.showMessageDialog(null, "All fields must be a positive number!");
+				}
 			}
 		});
 		btnSave.setIcon(new ImageIcon(PageOrder.class.getResource("/img_btn/save_btn.png")));
@@ -310,7 +320,10 @@ public class PageOrder {
 							Integer.parseInt(amount3.getText()),
 							Integer.parseInt(amount4.getText()), 
 							Integer.parseInt(amount5.getText()));
-					
+					JOptionPane.showMessageDialog(null, "Order entry has been inserted successfully!", "Notification", JOptionPane.INFORMATION_MESSAGE);
+					//close window or return to dashboard
+					frame.setVisible(false); //you can't see me!
+					frame.dispose(); //Destroy the JFrame object
 				}
 			}
 		});
@@ -353,6 +366,18 @@ public class PageOrder {
 		frame.getContentPane().setBackground(Color.WHITE);
 		
 		cards = new JPanel(new CardLayout());
+		
+		dashboardButton = new JButton();
+		dashboardButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//close window or return to dashboard
+				frame.setVisible(false); //you can't see me!
+				frame.dispose(); //Destroy the JFrame object
+			}
+		});
+		dashboardButton.setIcon(new ImageIcon(PageOrder.class.getResource("/img_btn/dashboard_btn.png")));
+		dashboardButton.setBounds(825, 40, 125, 57);
+		frame.getContentPane().add(dashboardButton);
 		
 		initOrderPanel();
 		initConfirmPanel();

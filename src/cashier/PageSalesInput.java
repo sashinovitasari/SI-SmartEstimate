@@ -1,6 +1,7 @@
 package cashier;
 
 import java.awt.BorderLayout;
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
 
@@ -15,6 +16,9 @@ import javax.swing.SwingConstants;
 import com.toedter.calendar.JDateChooser;
 
 import auth.UserManagement;
+import order.OrderController;
+import order.PageOrder;
+
 import javax.swing.JTextField;
 import java.awt.Font;
 import java.awt.event.ActionListener;
@@ -40,6 +44,7 @@ public class PageSalesInput {
 	private JButton inc_3;
 	private JButton inc_4;
 	private JButton inc_5;
+	private JButton dashboardButton;
 
 	/**
 	 * Launch the application.
@@ -72,6 +77,18 @@ public class PageSalesInput {
 		frame.setResizable(false);
 		frame.getContentPane().setBackground(Color.WHITE);
 		
+		dashboardButton = new JButton();
+		dashboardButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//close window or return to dashboard
+				frame.setVisible(false); //you can't see me!
+				frame.dispose(); //Destroy the JFrame object
+			}
+		});
+		dashboardButton.setIcon(new ImageIcon(PageOrder.class.getResource("/img_btn/dashboard_btn.png")));
+		dashboardButton.setBounds(825, 40, 125, 57);
+		frame.getContentPane().add(dashboardButton);
+		
 		JPanel panel = new JPanel();
 		frame.getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
@@ -83,13 +100,22 @@ public class PageSalesInput {
 		btnSave = new JButton("");
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int dialogResult = JOptionPane.showConfirmDialog(null, "Are you sure the input is correct?", "Confirmation", JOptionPane.YES_NO_OPTION);
-				if (dialogResult == JOptionPane.YES_OPTION) {
-					SalesController.addToDatabase(0, inputDate.getDate(), 
-							Integer.parseInt(item_1.getText()), Integer.parseInt(item_2.getText()), 
-							Integer.parseInt(item_3.getText()), Integer.parseInt(item_4.getText()), 
-							Integer.parseInt(item_5.getText()));
-					JOptionPane.showMessageDialog(null, "Sales entry has been inserted successfully!", "Notification", JOptionPane.INFORMATION_MESSAGE);
+				String string1 = item_1.getText();
+				String string2 = item_2.getText();
+				String string3 = item_3.getText();
+				String string4 = item_4.getText();
+				String string5 = item_5.getText();
+				if (OrderController.isInputValid(string1,string2,string3,string4,string5)) {
+					int dialogResult = JOptionPane.showConfirmDialog(null, "Are you sure the input is correct?", "Confirmation", JOptionPane.YES_NO_OPTION);
+					if (dialogResult == JOptionPane.YES_OPTION) {
+						SalesController.addToDatabase(0, inputDate.getDate(), 
+								Integer.parseInt(item_1.getText()), Integer.parseInt(item_2.getText()), 
+								Integer.parseInt(item_3.getText()), Integer.parseInt(item_4.getText()), 
+								Integer.parseInt(item_5.getText()));
+						JOptionPane.showMessageDialog(null, "Sales entry has been inserted successfully!", "Notification", JOptionPane.INFORMATION_MESSAGE);
+					}
+				} else {
+					JOptionPane.showMessageDialog(null, "All fields must be a positive number!");
 				}
 			}
 		});
@@ -146,7 +172,8 @@ public class PageSalesInput {
 		dec_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Integer val = Integer.parseInt(item_1.getText());
-				val--; item_1.setText(val.toString());
+				if (val <= 0) val = 0; else val--;
+				item_1.setText(val.toString());
 			}
 		});
 		dec_1.setIcon(new ImageIcon(PageSalesInput.class.getResource("/img_btn/dec_btn.png")));
@@ -157,7 +184,8 @@ public class PageSalesInput {
 		dec_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Integer val = Integer.parseInt(item_2.getText());
-				val--; item_2.setText(val.toString());
+				if (val <= 0) val = 0; else val--;
+				item_2.setText(val.toString());
 			}
 		});
 		dec_2.setIcon(new ImageIcon(PageSalesInput.class.getResource("/img_btn/dec_btn.png")));
@@ -168,7 +196,8 @@ public class PageSalesInput {
 		dec_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Integer val = Integer.parseInt(item_3.getText());
-				val--; item_3.setText(val.toString());
+				if (val <= 0) val = 0; else val--;
+				item_3.setText(val.toString());
 			}
 		});
 		dec_3.setIcon(new ImageIcon(PageSalesInput.class.getResource("/img_btn/dec_btn.png")));
@@ -179,7 +208,8 @@ public class PageSalesInput {
 		dec_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Integer val = Integer.parseInt(item_4.getText());
-				val--; item_4.setText(val.toString());
+				if (val <= 0) val = 0; else val--;
+				item_4.setText(val.toString());
 			}
 		});
 		dec_4.setIcon(new ImageIcon(PageSalesInput.class.getResource("/img_btn/dec_btn.png")));
@@ -190,7 +220,8 @@ public class PageSalesInput {
 		dec_5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Integer val = Integer.parseInt(item_5.getText());
-				val--; item_5.setText(val.toString());
+				if (val <= 0) val = 0; else val--;
+				item_5.setText(val.toString());
 			}
 		});
 		dec_5.setIcon(new ImageIcon(PageSalesInput.class.getResource("/img_btn/dec_btn.png")));
