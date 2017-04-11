@@ -18,11 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-import cashier.SalesController;
-import cashier.SalesPage;
-import estimation.EstimationPage;
-
-public class OrderPage {
+public class PageOrder {
 
 	private JFrame frame;
 	private JTextField item_1;
@@ -62,7 +58,7 @@ public class OrderPage {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					OrderPage window = new OrderPage();
+					PageOrder window = new PageOrder();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -128,12 +124,12 @@ public class OrderPage {
 		        amount5.setText(item_5.getText());
 			}
 		});
-		btnSave.setIcon(new ImageIcon(SalesPage.class.getResource("/img_btn/save_btn.png")));
+		btnSave.setIcon(new ImageIcon(PageOrder.class.getResource("/img_btn/save_btn.png")));
 		btnSave.setBounds(728, 540, 125, 57);
 		orderPanel.add(btnSave);
 		
 		btnDiscard = new JButton("");
-		btnDiscard.setIcon(new ImageIcon(SalesPage.class.getResource("/img_btn/discard_btn.png")));
+		btnDiscard.setIcon(new ImageIcon(PageOrder.class.getResource("/img_btn/discard_btn.png")));
 		btnDiscard.setBounds(593, 540, 125, 57);
 		orderPanel.add(btnDiscard);
 		
@@ -145,7 +141,7 @@ public class OrderPage {
 				item_1.setText(val.toString());
 			}
 		});
-		dec_1.setIcon(new ImageIcon(SalesPage.class.getResource("/img_btn/dec_btn.png")));
+		dec_1.setIcon(new ImageIcon(PageOrder.class.getResource("/img_btn/dec_btn.png")));
 		dec_1.setBounds(693, 232, 36, 35);
 		orderPanel.add(dec_1);
 		
@@ -157,7 +153,7 @@ public class OrderPage {
 				item_2.setText(val.toString());
 			}
 		});
-		dec_2.setIcon(new ImageIcon(SalesPage.class.getResource("/img_btn/dec_btn.png")));
+		dec_2.setIcon(new ImageIcon(PageOrder.class.getResource("/img_btn/dec_btn.png")));
 		dec_2.setBounds(693, 281, 36, 35);
 		orderPanel.add(dec_2);
 		
@@ -169,7 +165,7 @@ public class OrderPage {
 				item_3.setText(val.toString());
 			}
 		});
-		dec_3.setIcon(new ImageIcon(SalesPage.class.getResource("/img_btn/dec_btn.png")));
+		dec_3.setIcon(new ImageIcon(PageOrder.class.getResource("/img_btn/dec_btn.png")));
 		dec_3.setBounds(693, 335, 36, 35);
 		orderPanel.add(dec_3);
 		
@@ -181,7 +177,7 @@ public class OrderPage {
 				item_4.setText(val.toString());
 			}
 		});
-		dec_4.setIcon(new ImageIcon(SalesPage.class.getResource("/img_btn/dec_btn.png")));
+		dec_4.setIcon(new ImageIcon(PageOrder.class.getResource("/img_btn/dec_btn.png")));
 		dec_4.setBounds(693, 386, 36, 35);
 		orderPanel.add(dec_4);
 		
@@ -193,7 +189,7 @@ public class OrderPage {
 				item_5.setText(val.toString());
 			}
 		});
-		dec_5.setIcon(new ImageIcon(SalesPage.class.getResource("/img_btn/dec_btn.png")));
+		dec_5.setIcon(new ImageIcon(PageOrder.class.getResource("/img_btn/dec_btn.png")));
 		dec_5.setBounds(693, 440, 36, 35);
 		orderPanel.add(dec_5);
 		
@@ -204,7 +200,7 @@ public class OrderPage {
 				val++; item_1.setText(val.toString());
 			}
 		});
-		inc_1.setIcon(new ImageIcon(SalesPage.class.getResource("/img_btn/inc_btn.png")));
+		inc_1.setIcon(new ImageIcon(PageOrder.class.getResource("/img_btn/inc_btn.png")));
 		inc_1.setBounds(799, 232, 36, 35);
 		orderPanel.add(inc_1);
 		
@@ -215,7 +211,7 @@ public class OrderPage {
 				val++; item_2.setText(val.toString());
 			}
 		});
-		inc_2.setIcon(new ImageIcon(SalesPage.class.getResource("/img_btn/inc_btn.png")));
+		inc_2.setIcon(new ImageIcon(PageOrder.class.getResource("/img_btn/inc_btn.png")));
 		inc_2.setBounds(799, 281, 36, 35);
 		orderPanel.add(inc_2);
 		
@@ -226,7 +222,7 @@ public class OrderPage {
 				val++; item_3.setText(val.toString());
 			}
 		});
-		inc_3.setIcon(new ImageIcon(SalesPage.class.getResource("/img_btn/inc_btn.png")));
+		inc_3.setIcon(new ImageIcon(PageOrder.class.getResource("/img_btn/inc_btn.png")));
 		inc_3.setBounds(799, 335, 36, 35);
 		orderPanel.add(inc_3);
 		
@@ -237,7 +233,7 @@ public class OrderPage {
 				val++; item_4.setText(val.toString());
 			}
 		});
-		inc_4.setIcon(new ImageIcon(SalesPage.class.getResource("/img_btn/inc_btn.png")));
+		inc_4.setIcon(new ImageIcon(PageOrder.class.getResource("/img_btn/inc_btn.png")));
 		inc_4.setBounds(799, 386, 36, 35);
 		orderPanel.add(inc_4);
 		
@@ -248,13 +244,13 @@ public class OrderPage {
 				val++; item_5.setText(val.toString());
 			}
 		});
-		inc_5.setIcon(new ImageIcon(SalesPage.class.getResource("/img_btn/inc_btn.png")));
+		inc_5.setIcon(new ImageIcon(PageOrder.class.getResource("/img_btn/inc_btn.png")));
 		inc_5.setBounds(799, 440, 36, 35);
 		orderPanel.add(inc_5);
 		
 		JLabel border = new JLabel("");
 		border.setHorizontalAlignment(SwingConstants.CENTER);
-		border.setIcon(new ImageIcon(EstimationPage.class.getResource("/img_pages/OrderPage.png")));
+		border.setIcon(new ImageIcon(PageOrder.class.getResource("/img_pages/OrderPage.png")));
 		border.setBounds(0, 0, 994, 621);
 		orderPanel.add(border);
 	}
@@ -318,7 +314,7 @@ public class OrderPage {
 				}
 			}
 		});
-		btnSave.setIcon(new ImageIcon(SalesPage.class.getResource("/img_btn/proceed_btn.png")));
+		btnSave.setIcon(new ImageIcon(PageOrder.class.getResource("/img_btn/proceed_btn.png")));
 		btnSave.setBounds(728, 540, 125, 57);
 		confirmPanel.add(btnSave);
 		
@@ -330,13 +326,13 @@ public class OrderPage {
 		        cl.show(cards, ORDERPANEL);
 			}
 		});
-		btnDiscard.setIcon(new ImageIcon(SalesPage.class.getResource("/img_btn/cancel_btn.png")));
+		btnDiscard.setIcon(new ImageIcon(PageOrder.class.getResource("/img_btn/cancel_btn.png")));
 		btnDiscard.setBounds(593, 540, 125, 57);
 		confirmPanel.add(btnDiscard);
 		
 		JLabel border = new JLabel("");
 		border.setHorizontalAlignment(SwingConstants.CENTER);
-		border.setIcon(new ImageIcon(EstimationPage.class.getResource("/img_pages/ConfirmPage.png")));
+		border.setIcon(new ImageIcon(PageOrder.class.getResource("/img_pages/ConfirmPage.png")));
 		border.setBounds(0, 0, 994, 621);
 		confirmPanel.add(border);
 	}
@@ -344,7 +340,7 @@ public class OrderPage {
 	/**
 	 * Create the application.
 	 */
-	public OrderPage() {
+	public PageOrder() {
 		initialize();
 	}
 
