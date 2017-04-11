@@ -124,7 +124,7 @@ public class DashboardSMPage {
 		JLabel weather_1 = new JLabel("");
 		if (tomorrow.getString("text").contains("Cloudy")) {
 			weather_1.setIcon(new ImageIcon(DashboardSMPage.class.getResource("/img_weather/cloudy.png")));
-		} else if (tomorrow.getString("text").contains("Rain") || today.getString("text").contains("Shower")) {
+		} else if (tomorrow.getString("text").contains("Rain") || tomorrow.getString("text").contains("Shower")) {
 			weather_1.setIcon(new ImageIcon(DashboardSMPage.class.getResource("/img_weather/rain.png")));
 		} else if (tomorrow.getString("text").contains("Thunder")) {
 			weather_1.setIcon(new ImageIcon(DashboardSMPage.class.getResource("/img_weather/thunderstorm.png")));
@@ -150,7 +150,7 @@ public class DashboardSMPage {
 		JLabel weather_2 = new JLabel("");
 		if (next_tomorrow.getString("text").contains("Cloudy")) {
 			weather_2.setIcon(new ImageIcon(DashboardSMPage.class.getResource("/img_weather/cloudy.png")));
-		} else if (next_tomorrow.getString("text").contains("Rain") || today.getString("text").contains("Shower")) {
+		} else if (next_tomorrow.getString("text").contains("Rain") || next_tomorrow.getString("text").contains("Shower")) {
 			weather_2.setIcon(new ImageIcon(DashboardSMPage.class.getResource("/img_weather/rain.png")));
 		} else if (next_tomorrow.getString("text").contains("Thunder")) {
 			weather_2.setIcon(new ImageIcon(DashboardSMPage.class.getResource("/img_weather/thunderstorm.png")));
@@ -173,7 +173,7 @@ public class DashboardSMPage {
 		JLabel weather_3 = new JLabel("");
 		if (next2_tomorrow.getString("text").contains("Cloudy")) {
 			weather_3.setIcon(new ImageIcon(DashboardSMPage.class.getResource("/img_weather/cloudy.png")));
-		} else if (next2_tomorrow.getString("text").contains("Rain") || today.getString("text").contains("Shower")) {
+		} else if (next2_tomorrow.getString("text").contains("Rain") || next2_tomorrow.getString("text").contains("Shower")) {
 			weather_3.setIcon(new ImageIcon(DashboardSMPage.class.getResource("/img_weather/rain.png")));
 		} else if (next2_tomorrow.getString("text").contains("Thunder")) {
 			weather_3.setIcon(new ImageIcon(DashboardSMPage.class.getResource("/img_weather/thunderstorm.png")));

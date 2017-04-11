@@ -21,7 +21,7 @@ public class DBController {
 	}
 	
 	public static Connection connectDatabase() {
-		Connection conn = null;
+		conn = null;
 		try {
 			// create our mysql database connection
 			String myDriver = "org.gjt.mm.mysql.Driver";
@@ -30,13 +30,12 @@ public class DBController {
 			conn = DriverManager.getConnection(myUrl, "root", "");
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
+		} 
 		return conn;
 	}
 	
 	public static ResultSet queryDatabase(String query) {
 		ResultSet rs = null;
-		Connection conn = connectDatabase();
 		PreparedStatement ps;
 		try {
 			if (query.startsWith("SELECT")) {
@@ -57,6 +56,11 @@ public class DBController {
 	}
 	
 	public static void closeDatabase() {
+		try {
+			conn.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 	}
 }

@@ -35,7 +35,12 @@ public class ProcEstimation {
 	public static Classifier neuralModel;
 	
 	public static Classifier generateEstimationModel() {
-		Classifier cls = new MultilayerPerceptron();
+		MultilayerPerceptron cls = new MultilayerPerceptron();
+		cls.setLearningRate(0.1);
+		cls.setMomentum(0.2);
+		cls.setTrainingTime(2000);
+		cls.setHiddenLayers("3");
+		
 		try {
 			cls.buildClassifier(data);
 		} catch (Exception e) {
@@ -62,7 +67,7 @@ public class ProcEstimation {
 			
 			Instance inst = ProcEstimation.createInstance(day, date, month, year, weather, sales);
 			dataUnlabeled.add(inst);
-			
+
 			result = neuralModel.classifyInstance(dataUnlabeled.firstInstance());
 		} catch (Exception e) {
 			e.printStackTrace();

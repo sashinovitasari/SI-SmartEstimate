@@ -8,3 +8,5 @@ ALTER TABLE user MODIFY ID_user INT PRIMARY KEY AUTO_INCREMENT;
 ALTER TABLE `pesanan_produk` CHANGE `id_order` `id_order` INT(11) NOT NULL;
 ALTER TABLE `pesanan_produk` DROP PRIMARY KEY;
 ALTER TABLE `pesanan_produk` CHANGE `id_order` `id_order` INT(11) NULL DEFAULT NULL;
+
+ALTER TABLE info_cuaca ADD tanggal DATETIME;
