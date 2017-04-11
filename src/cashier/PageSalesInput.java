@@ -77,6 +77,7 @@ public class PageSalesInput {
 		panel.setLayout(null);
 		
 		inputDate = new JDateChooser();
+		inputDate.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		inputDate.setBounds(248, 152, 594, 35);
 		panel.add(inputDate);
 		
