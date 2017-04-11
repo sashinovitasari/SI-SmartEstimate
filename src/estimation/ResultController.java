@@ -18,6 +18,7 @@ public class ResultController {
 	public static void addToDatabase(int uid, Date d, int item1, int item2, int item3, int item4, int item5) {
 		String query = "INSERT INTO data_pesanan (tanggal_penjualan, id_user) VALUE ('"
 				+ jDateToSqlDate(d) + "', " + uid + ")";
+		DBController.connectDatabase();
 		ResultSet rs = DBController.queryDatabase(query);
 		Integer last_inserted_id = 0;
 		try {
@@ -42,7 +43,9 @@ public class ResultController {
 	        }
 		} catch (Exception e) {
 			e.printStackTrace();
-		}	
+		} finally {
+			DBController.closeDatabase();
+		}
 	}
 	
 	public static void main(String[] args) {

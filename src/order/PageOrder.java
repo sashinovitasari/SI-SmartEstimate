@@ -310,7 +310,7 @@ public class PageOrder {
 							Integer.parseInt(amount3.getText()),
 							Integer.parseInt(amount4.getText()), 
 							Integer.parseInt(amount5.getText()));
-					
+					JOptionPane.showMessageDialog(null, "Your order has been sent to the Head Office");
 				}
 			}
 		});

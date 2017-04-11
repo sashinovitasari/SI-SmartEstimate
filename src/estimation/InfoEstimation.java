@@ -33,7 +33,7 @@ public class InfoEstimation {
 			query = "SELECT * FROM data_penjualan NATURAL JOIN penjualan_produk WHERE nama_produk = 'Bolen pisang coklat'";
 			break;
 		}
-		
+		DBController.connectDatabase();
 		ResultSet rs = DBController.queryDatabase(query);
 		
 		ProcEstimation.initializeInstances();
@@ -56,6 +56,8 @@ public class InfoEstimation {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			DBController.closeDatabase();
 		}
 		
 		ProcEstimation.neuralModel = ProcEstimation.generateEstimationModel();
