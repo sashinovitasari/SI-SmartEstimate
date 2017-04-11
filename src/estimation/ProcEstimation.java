@@ -62,7 +62,7 @@ public class ProcEstimation {
 			
 			Instance inst = ProcEstimation.createInstance(day, date, month, year, weather, sales);
 			dataUnlabeled.add(inst);
-			
+
 			result = neuralModel.classifyInstance(dataUnlabeled.firstInstance());
 		} catch (Exception e) {
 			e.printStackTrace();

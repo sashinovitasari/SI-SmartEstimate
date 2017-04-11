@@ -54,7 +54,10 @@ public class ResultPage {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+    public static void main (String args[]) {
+    	launch();
+    }
+	public static void launch() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -72,7 +75,7 @@ public class ResultPage {
 		orderPanel.setLayout(null);
 		
 		item_1 = new JTextField();
-		item_1.setText("0");
+		item_1.setText(new Integer(new Double(ResultController.result[1]).intValue()).toString());
 		item_1.setHorizontalAlignment(SwingConstants.CENTER);
 		item_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		item_1.setBounds(737, 243, 53, 35);
@@ -80,7 +83,7 @@ public class ResultPage {
 		item_1.setColumns(10);
 		
 		item_2 = new JTextField();
-		item_2.setText("0");
+		item_2.setText(new Integer(new Double(ResultController.result[2]).intValue()).toString());
 		item_2.setHorizontalAlignment(SwingConstants.CENTER);
 		item_2.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		item_2.setColumns(10);
@@ -88,7 +91,7 @@ public class ResultPage {
 		orderPanel.add(item_2);
 		
 		item_3 = new JTextField();
-		item_3.setText("0");
+		item_3.setText(new Integer(new Double(ResultController.result[3]).intValue()).toString());
 		item_3.setHorizontalAlignment(SwingConstants.CENTER);
 		item_3.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		item_3.setColumns(10);
@@ -96,7 +99,7 @@ public class ResultPage {
 		orderPanel.add(item_3);
 		
 		item_5 = new JTextField();
-		item_5.setText("0");
+		item_5.setText(new Integer(new Double(ResultController.result[5]).intValue()).toString());
 		item_5.setHorizontalAlignment(SwingConstants.CENTER);
 		item_5.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		item_5.setColumns(10);
@@ -104,7 +107,7 @@ public class ResultPage {
 		orderPanel.add(item_5);
 		
 		item_4 = new JTextField();
-		item_4.setText("0");
+		item_4.setText(new Integer(new Double(ResultController.result[4]).intValue()).toString());
 		item_4.setHorizontalAlignment(SwingConstants.CENTER);
 		item_4.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		item_4.setColumns(10);

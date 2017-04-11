@@ -7,6 +7,8 @@ import java.util.Date;
 import db.DBController;
 
 public class ResultController {
+	public static double[] result = new double[6];
+	
 	private static String jDateToSqlDate (Date d) {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		String dateToStr = format.format(d);

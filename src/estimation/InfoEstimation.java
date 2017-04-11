@@ -45,7 +45,6 @@ public class InfoEstimation {
 	            cal.setTime(d);
 	            
 				String day = new SimpleDateFormat("EEEE", Locale.ENGLISH).format(d);
-				System.out.println(day);
 				int date = cal.get(Calendar.DATE);
 				int month = cal.get(Calendar.MONTH);
 				int year = cal.get(Calendar.YEAR);
@@ -58,11 +57,11 @@ public class InfoEstimation {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		ProcEstimation.neuralModel = ProcEstimation.generateEstimationModel();
 	}
 	
 	public static void main (String args[]) {
-		fetchData(1);
-		System.out.println(ProcEstimation.calculateEstimation());
 		
 	}
 }
