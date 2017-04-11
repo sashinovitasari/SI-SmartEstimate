@@ -26,9 +26,7 @@ public class UserManagement {
 				+ fullname + "', '" + String.valueOf(password) + "', '" + "1" + "', '" 
 				+ (position.equals("Store Manager") ? "s" : "c") + "', '" 
 				+ username + "')";
-		DBController.connectDatabase();
 		ResultSet rs = DBController.queryDatabase(query);
-		DBController.closeDatabase();
 		
 		return REGISTER_SUCCESS;
 	}
@@ -39,9 +37,7 @@ public class UserManagement {
 		} else if (validateUser(username, password)) {
 			String query = "UPDATE user SET login_state = 1 WHERE username = '" + username 
 					+ "' AND password = '" + String.valueOf(password) + "'";
-			DBController.connectDatabase();
 			DBController.queryDatabase(query);
-			DBController.closeDatabase();
 			return LOGIN_SUCCESS;
 		} else {
 			return AUTHENTICATION_FAILED;
@@ -54,33 +50,34 @@ public class UserManagement {
 	
 	private static boolean matchUserID(String username) {
 		String query = "SELECT * FROM user WHERE username = '" + username + "'";
-		DBController.connectDatabase();
 		ResultSet rs = DBController.queryDatabase(query);
-		boolean result = false;
+		
 		try {
-			result = rs.next();
+			if(rs.next()) {
+				return true;
+			} else {
+				return false;
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			DBController.closeDatabase();
 		}
-		
-		return result;
+		return false;
 	}
 	
 	private static boolean validateUser(String username, char[] password) {
 		String query = "SELECT * FROM user WHERE username = '" + username 
 				+ "' AND password = '" + String.valueOf(password) + "'";
-		DBController.connectDatabase();
 		ResultSet rs = DBController.queryDatabase(query);
-		boolean result = true;
+		
 		try {
-			result = rs.next();
+			if(rs.next()) {
+				return true;
+			} else {
+				return false;
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			DBController.closeDatabase();
 		}
-		return result;
+		return true;
 	}
 }

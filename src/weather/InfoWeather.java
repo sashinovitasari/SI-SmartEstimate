@@ -3,17 +3,12 @@ package weather;
 import java.io.BufferedInputStream;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.sql.ResultSet;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 import org.omg.CORBA.portable.InputStream;
 
-import db.DBController;
 import sun.net.www.protocol.http.HttpURLConnection;
 
 public class InfoWeather {
@@ -21,12 +16,6 @@ public class InfoWeather {
 	public static int TOMORROW = 1;
 	public static int NEXT_OF_TOMORROW = 2;
 	public static int NEXT_NEXT_OF_TOMORROW = 3;
-	
-	private static String jDateToSqlDate (Date d) {
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-		String dateToStr = format.format(d);
-		return dateToStr;
-	}
 	
 	/*
 	 * curl https://query.yahooapis.com/v1/public/yql 
@@ -54,72 +43,28 @@ public class InfoWeather {
 		return result;
 	}
 	
-	public static void addDatabase(Date d, String weather) {
-		boolean result = false;
-		String query = "SELECT * FROM info_cuaca WHERE tanggal = '" + jDateToSqlDate(d) +"'";
-		DBController.connectDatabase();
-		ResultSet rs = DBController.queryDatabase(query);
-		try {
-			result = rs.next();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	public static void addDatabase() {
 		
-		String updateQuery;
-		if (result) { // ada di database -> Update
-			updateQuery = "UPDATE info_cuaca SET nama_cuaca = '" + weather + "'"
-					+ " WHERE tanggal = '" + jDateToSqlDate(d) +"'";
-		} else { // ga ada di database -> Insert
-			updateQuery = "INSERT INTO info_cuaca(tanggal, nama_cuaca, bobot_cuaca) VALUE ('"
-					+ jDateToSqlDate(d) +"', '" + weather + "', " + "0" + ")";
-		}
-		rs = DBController.queryDatabase(updateQuery);
-		DBController.closeDatabase();
-	}
-	
-	public static String infoWeatherFromDatabase(Date d) {
-		String query = "SELECT * FROM info_cuaca WHERE tanggal = '" + jDateToSqlDate(d) +"'";
-		DBController.connectDatabase();
-		ResultSet rs = DBController.queryDatabase(query);
-		String weather = "Sunny";
-		try {
-			if (rs.next()) {
-				weather = rs.getString("nama_cuaca");
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			DBController.closeDatabase();
-		}
-		return weather;
 	}
 	
 	public static JSONObject showWeatherInfo(int day) {
-		JSONObject json = new JSONObject();
+		JSONObject json;
 		JSONArray jarray;
-		String weather = "Undefined";
 		try {
 			json = fetchWeatherInfo();
 			json = json.getJSONObject("query").getJSONObject("results")
 					.getJSONObject("channel").getJSONObject("item");
 			jarray = json.getJSONArray("forecast");
 			
-			json = (day == TODAY) ? json.getJSONObject("condition") : jarray.getJSONObject(day);
-			weather = json.getString("text");
-			
+			if (day == TODAY) {
+				return json.getJSONObject("condition");
+			} else {
+				return jarray.getJSONObject(day);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		/* Insert to DB */
-		Date d = new Date();
-		Calendar cal = Calendar.getInstance();
-        cal.setTime(d);
-        cal.add(Calendar.DATE, day);
-        d = cal.getTime();
-        addDatabase (d, weather);
-		
-		return json;
+		return new JSONObject();
 	}
 	
 	public static float calculateWeight() {
@@ -128,11 +73,10 @@ public class InfoWeather {
 	
 	public static void main (String args[]) {
 		try {
-			System.out.println(showWeatherInfo(TODAY));
+			System.out.println(fetchWeatherInfo());//showWeatherInfo(TODAY));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
 	}
-	
 }
