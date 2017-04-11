@@ -21,7 +21,7 @@ import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class SalesPage {
+public class PageSalesInput {
 
 	private JFrame frame;
 	private JDateChooser inputDate;
@@ -49,7 +49,7 @@ public class SalesPage {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					SalesPage window = new SalesPage();
+					PageSalesInput window = new PageSalesInput();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -61,7 +61,7 @@ public class SalesPage {
 	/**
 	 * Create the application.
 	 */
-	public SalesPage() {
+	public PageSalesInput() {
 		initialize();
 	}
 
@@ -94,12 +94,12 @@ public class SalesPage {
 				}
 			}
 		});
-		btnSave.setIcon(new ImageIcon(SalesPage.class.getResource("/img_btn/save_btn.png")));
+		btnSave.setIcon(new ImageIcon(PageSalesInput.class.getResource("/img_btn/save_btn.png")));
 		btnSave.setBounds(728, 540, 125, 57);
 		panel.add(btnSave);
 		
 		btnDiscard = new JButton("");
-		btnDiscard.setIcon(new ImageIcon(SalesPage.class.getResource("/img_btn/discard_btn.png")));
+		btnDiscard.setIcon(new ImageIcon(PageSalesInput.class.getResource("/img_btn/discard_btn.png")));
 		btnDiscard.setBounds(593, 540, 125, 57);
 		panel.add(btnDiscard);
 		
@@ -150,7 +150,7 @@ public class SalesPage {
 				val--; item_1.setText(val.toString());
 			}
 		});
-		dec_1.setIcon(new ImageIcon(SalesPage.class.getResource("/img_btn/dec_btn.png")));
+		dec_1.setIcon(new ImageIcon(PageSalesInput.class.getResource("/img_btn/dec_btn.png")));
 		dec_1.setBounds(693, 264, 36, 35);
 		panel.add(dec_1);
 		
@@ -161,7 +161,7 @@ public class SalesPage {
 				val--; item_2.setText(val.toString());
 			}
 		});
-		dec_2.setIcon(new ImageIcon(SalesPage.class.getResource("/img_btn/dec_btn.png")));
+		dec_2.setIcon(new ImageIcon(PageSalesInput.class.getResource("/img_btn/dec_btn.png")));
 		dec_2.setBounds(693, 313, 36, 35);
 		panel.add(dec_2);
 		
@@ -172,7 +172,7 @@ public class SalesPage {
 				val--; item_3.setText(val.toString());
 			}
 		});
-		dec_3.setIcon(new ImageIcon(SalesPage.class.getResource("/img_btn/dec_btn.png")));
+		dec_3.setIcon(new ImageIcon(PageSalesInput.class.getResource("/img_btn/dec_btn.png")));
 		dec_3.setBounds(693, 367, 36, 35);
 		panel.add(dec_3);
 		
@@ -183,7 +183,7 @@ public class SalesPage {
 				val--; item_4.setText(val.toString());
 			}
 		});
-		dec_4.setIcon(new ImageIcon(SalesPage.class.getResource("/img_btn/dec_btn.png")));
+		dec_4.setIcon(new ImageIcon(PageSalesInput.class.getResource("/img_btn/dec_btn.png")));
 		dec_4.setBounds(693, 418, 36, 35);
 		panel.add(dec_4);
 		
@@ -194,7 +194,7 @@ public class SalesPage {
 				val--; item_5.setText(val.toString());
 			}
 		});
-		dec_5.setIcon(new ImageIcon(SalesPage.class.getResource("/img_btn/dec_btn.png")));
+		dec_5.setIcon(new ImageIcon(PageSalesInput.class.getResource("/img_btn/dec_btn.png")));
 		dec_5.setBounds(693, 472, 36, 35);
 		panel.add(dec_5);
 		
@@ -205,7 +205,7 @@ public class SalesPage {
 				val++; item_1.setText(val.toString());
 			}
 		});
-		inc_1.setIcon(new ImageIcon(SalesPage.class.getResource("/img_btn/inc_btn.png")));
+		inc_1.setIcon(new ImageIcon(PageSalesInput.class.getResource("/img_btn/inc_btn.png")));
 		inc_1.setBounds(799, 264, 36, 35);
 		panel.add(inc_1);
 		
@@ -216,7 +216,7 @@ public class SalesPage {
 				val++; item_2.setText(val.toString());
 			}
 		});
-		inc_2.setIcon(new ImageIcon(SalesPage.class.getResource("/img_btn/inc_btn.png")));
+		inc_2.setIcon(new ImageIcon(PageSalesInput.class.getResource("/img_btn/inc_btn.png")));
 		inc_2.setBounds(799, 313, 36, 35);
 		panel.add(inc_2);
 		
@@ -227,7 +227,7 @@ public class SalesPage {
 				val++; item_3.setText(val.toString());
 			}
 		});
-		inc_3.setIcon(new ImageIcon(SalesPage.class.getResource("/img_btn/inc_btn.png")));
+		inc_3.setIcon(new ImageIcon(PageSalesInput.class.getResource("/img_btn/inc_btn.png")));
 		inc_3.setBounds(799, 367, 36, 35);
 		panel.add(inc_3);
 		
@@ -238,7 +238,7 @@ public class SalesPage {
 				val++; item_4.setText(val.toString());
 			}
 		});
-		inc_4.setIcon(new ImageIcon(SalesPage.class.getResource("/img_btn/inc_btn.png")));
+		inc_4.setIcon(new ImageIcon(PageSalesInput.class.getResource("/img_btn/inc_btn.png")));
 		inc_4.setBounds(799, 418, 36, 35);
 		panel.add(inc_4);
 		
@@ -249,7 +249,7 @@ public class SalesPage {
 				val++; item_5.setText(val.toString());
 			}
 		});
-		inc_5.setIcon(new ImageIcon(SalesPage.class.getResource("/img_btn/inc_btn.png")));
+		inc_5.setIcon(new ImageIcon(PageSalesInput.class.getResource("/img_btn/inc_btn.png")));
 		inc_5.setBounds(799, 472, 36, 35);
 		panel.add(inc_5);
 		
