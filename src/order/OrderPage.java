@@ -141,7 +141,8 @@ public class OrderPage {
 		dec_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Integer val = Integer.parseInt(item_1.getText());
-				val--; item_1.setText(val.toString());
+				if (val <= 0) val = 0; else val--;
+				item_1.setText(val.toString());
 			}
 		});
 		dec_1.setIcon(new ImageIcon(SalesPage.class.getResource("/img_btn/dec_btn.png")));
@@ -152,7 +153,8 @@ public class OrderPage {
 		dec_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Integer val = Integer.parseInt(item_2.getText());
-				val--; item_2.setText(val.toString());
+				if (val <= 0) val = 0; else val--;
+				item_2.setText(val.toString());
 			}
 		});
 		dec_2.setIcon(new ImageIcon(SalesPage.class.getResource("/img_btn/dec_btn.png")));
@@ -163,7 +165,8 @@ public class OrderPage {
 		dec_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Integer val = Integer.parseInt(item_3.getText());
-				val--; item_3.setText(val.toString());
+				if (val <= 0) val = 0; else val--;
+				item_3.setText(val.toString());
 			}
 		});
 		dec_3.setIcon(new ImageIcon(SalesPage.class.getResource("/img_btn/dec_btn.png")));
@@ -174,7 +177,8 @@ public class OrderPage {
 		dec_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Integer val = Integer.parseInt(item_4.getText());
-				val--; item_4.setText(val.toString());
+				if (val <= 0) val = 0; else val--;
+				item_4.setText(val.toString());
 			}
 		});
 		dec_4.setIcon(new ImageIcon(SalesPage.class.getResource("/img_btn/dec_btn.png")));
@@ -185,7 +189,8 @@ public class OrderPage {
 		dec_5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Integer val = Integer.parseInt(item_5.getText());
-				val--; item_5.setText(val.toString());
+				if (val <= 0) val = 0; else val--;
+				item_5.setText(val.toString());
 			}
 		});
 		dec_5.setIcon(new ImageIcon(SalesPage.class.getResource("/img_btn/dec_btn.png")));
