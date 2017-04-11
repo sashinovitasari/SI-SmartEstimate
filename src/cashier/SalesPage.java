@@ -15,7 +15,6 @@ import javax.swing.SwingConstants;
 import com.toedter.calendar.JDateChooser;
 
 import auth.UserManagement;
-import auth.LoginPage;
 import estimation.EstimationPage;
 import javax.swing.JTextField;
 import java.awt.Font;
@@ -156,7 +155,7 @@ public class SalesPage {
 		panel.add(dec_1);
 		
 		dec_2 = new JButton("");
-		dec_1.addActionListener(new ActionListener() {
+		dec_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Integer val = Integer.parseInt(item_2.getText());
 				val--; item_2.setText(val.toString());
@@ -167,7 +166,7 @@ public class SalesPage {
 		panel.add(dec_2);
 		
 		dec_3 = new JButton("");
-		dec_1.addActionListener(new ActionListener() {
+		dec_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Integer val = Integer.parseInt(item_3.getText());
 				val--; item_3.setText(val.toString());
@@ -178,7 +177,7 @@ public class SalesPage {
 		panel.add(dec_3);
 		
 		dec_4 = new JButton("");
-		dec_1.addActionListener(new ActionListener() {
+		dec_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Integer val = Integer.parseInt(item_4.getText());
 				val--; item_4.setText(val.toString());
@@ -189,7 +188,7 @@ public class SalesPage {
 		panel.add(dec_4);
 		
 		dec_5 = new JButton("");
-		dec_1.addActionListener(new ActionListener() {
+		dec_5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Integer val = Integer.parseInt(item_5.getText());
 				val--; item_5.setText(val.toString());
