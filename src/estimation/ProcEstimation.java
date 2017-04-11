@@ -60,7 +60,7 @@ public class ProcEstimation {
             
 			String day = new SimpleDateFormat("EEEE", Locale.ENGLISH).format(d);
 			int date = cal.get(Calendar.DATE);
-			int month = cal.get(Calendar.MONTH);
+			int month = cal.get(Calendar.MONTH) + 1;
 			int year = cal.get(Calendar.YEAR);
 			String weather = InfoWeather.showWeatherInfo(InfoWeather.TOMORROW).getString("text");
 			int sales = 0;

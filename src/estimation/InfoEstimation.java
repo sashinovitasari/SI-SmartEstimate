@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.Locale;
 
 import db.DBController;
+import weather.InfoWeather;
 import weka.core.Instance;
 
 public class InfoEstimation {
@@ -64,6 +65,29 @@ public class InfoEstimation {
 		}
 	}
 	
+	public static double calculateAverageAccuracy() {
+		double result = 85.0;
+		String query = "SELECT avg(akurasi) AS rata2 FROM ("
+				+ "SELECT *, 1 - (ABS(jumlah_estimasi-jumlah_penjualan)/jumlah_penjualan) AS akurasi FROM ("
+				+ "SELECT tanggal_penjualan, nama_produk, jumlah_penjualan FROM data_penjualan NATURAL JOIN penjualan_produk"
+				+ ") AS sales NATURAL JOIN ("
+				+ "SELECT tanggal_penjualan, nama_produk, jumlah_estimasi FROM data_estimasi NATURAL JOIN estimasi_produk"
+				+ ") AS estimasi"
+				+ ") AS besar";
+		DBController.connectDatabase();
+		ResultSet rs = DBController.queryDatabase(query);
+		try {
+			if (rs.next()) {
+				result = rs.getDouble("rata2");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBController.closeDatabase();
+		}
+		return result;
+	}
+	
 	public static void fetchData(int product_id) {
 		String query = "";
 		switch (product_id) {
@@ -96,9 +120,9 @@ public class InfoEstimation {
 	            
 				String day = new SimpleDateFormat("EEEE", Locale.ENGLISH).format(d);
 				int date = cal.get(Calendar.DATE);
-				int month = cal.get(Calendar.MONTH);
+				int month = cal.get(Calendar.MONTH) + 1;
 				int year = cal.get(Calendar.YEAR);
-				String weather = "Sunny";
+				String weather = InfoWeather.infoWeatherFromDatabase(d);
 				int sales = rs.getInt("jumlah_penjualan");
 				
 				Instance inst = ProcEstimation.createInstance(day, date, month, year, weather, sales);
@@ -109,11 +133,10 @@ public class InfoEstimation {
 		} finally {
 			DBController.closeDatabase();
 		}
-		
 		ProcEstimation.neuralModel = ProcEstimation.generateEstimationModel();
 	}
 	
 	public static void main (String args[]) {
-		
+		System.out.println(calculateAverageAccuracy());
 	}
 }

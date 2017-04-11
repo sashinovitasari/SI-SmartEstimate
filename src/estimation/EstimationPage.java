@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dialog.ModalityType;
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.Window;
@@ -86,8 +87,7 @@ public class EstimationPage {
 		frame.getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
 		
-		JButton btnStart = new JButton("");
-		btnStart.addActionListener(new ActionListener() {
+		ActionListener actL = new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Window win = SwingUtilities.getWindowAncestor((AbstractButton)arg0.getSource());
 			    JDialog dialog = new JDialog(win, "", ModalityType.APPLICATION_MODAL);
@@ -138,17 +138,21 @@ public class EstimationPage {
 			    panel.add(progressBar, BorderLayout.CENTER);
 			    panel.add(new JLabel("Please wait......."), BorderLayout.PAGE_START);
 			    
-			    dialog.add(panel);
+			    dialog.getContentPane().add(panel);
 			    dialog.pack();
 			    dialog.setLocationRelativeTo(win);
 			    dialog.setVisible(true);
 			}
-		});
+		};
+		
+		JButton btnStart = new JButton("");
+		btnStart.addActionListener(actL);
 		btnStart.setIcon(new ImageIcon(EstimationPage.class.getResource("/img_btn/start_btn.png")));
 		btnStart.setBounds(743, 219, 125, 57);
 		panel.add(btnStart);
 		
 		JButton btnStart2 = new JButton("");
+		btnStart2.addActionListener(actL);
 		btnStart2.setIcon(new ImageIcon(EstimationPage.class.getResource("/img_btn/start_btn.png")));
 		btnStart2.setBounds(743, 500, 125, 57);
 		panel.add(btnStart2);
@@ -159,6 +163,15 @@ public class EstimationPage {
 		JDateChooser endDate = new JDateChooser();
 		endDate.setBounds(785, 447, 125, 34);
 		panel.add(endDate);
+
+		double averageAcc = InfoEstimation.calculateAverageAccuracy();
+		String percentage = String.format("%.2f", averageAcc) + " %";
+		JLabel avgAcc = new JLabel(percentage);
+		avgAcc.setHorizontalAlignment(SwingConstants.CENTER);
+		avgAcc.setForeground(new Color(112, 68, 160));
+		avgAcc.setFont(new Font("Tahoma", Font.BOLD, 22));
+		avgAcc.setBounds(77, 500, 245, 57);
+		panel.add(avgAcc);
 		
 		JLabel border = new JLabel("");
 		border.setHorizontalAlignment(SwingConstants.CENTER);

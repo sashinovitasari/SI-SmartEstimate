@@ -77,6 +77,23 @@ public class InfoWeather {
 		DBController.closeDatabase();
 	}
 	
+	public static String infoWeatherFromDatabase(Date d) {
+		String query = "SELECT * FROM info_cuaca WHERE tanggal = '" + jDateToSqlDate(d) +"'";
+		DBController.connectDatabase();
+		ResultSet rs = DBController.queryDatabase(query);
+		String weather = "Sunny";
+		try {
+			if (rs.next()) {
+				weather = rs.getString("nama_cuaca");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBController.closeDatabase();
+		}
+		return weather;
+	}
+	
 	public static JSONObject showWeatherInfo(int day) {
 		JSONObject json = new JSONObject();
 		JSONArray jarray;
