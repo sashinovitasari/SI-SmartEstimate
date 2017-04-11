@@ -1,5 +1,5 @@
-package estimation;
-
+package order;
+// order tanggalnya now
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -18,7 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-public class ResultPage {
+public class PageOrder {
 
 	private JFrame frame;
 	private JTextField item_1;
@@ -58,7 +58,7 @@ public class ResultPage {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ResultPage window = new ResultPage();
+					PageOrder window = new PageOrder();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -75,7 +75,7 @@ public class ResultPage {
 		item_1.setText("0");
 		item_1.setHorizontalAlignment(SwingConstants.CENTER);
 		item_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		item_1.setBounds(737, 243, 53, 35);
+		item_1.setBounds(738, 232, 53, 35);
 		orderPanel.add(item_1);
 		item_1.setColumns(10);
 		
@@ -84,7 +84,7 @@ public class ResultPage {
 		item_2.setHorizontalAlignment(SwingConstants.CENTER);
 		item_2.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		item_2.setColumns(10);
-		item_2.setBounds(737, 292, 53, 35);
+		item_2.setBounds(738, 281, 53, 35);
 		orderPanel.add(item_2);
 		
 		item_3 = new JTextField();
@@ -92,7 +92,7 @@ public class ResultPage {
 		item_3.setHorizontalAlignment(SwingConstants.CENTER);
 		item_3.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		item_3.setColumns(10);
-		item_3.setBounds(737, 346, 53, 35);
+		item_3.setBounds(738, 335, 53, 35);
 		orderPanel.add(item_3);
 		
 		item_5 = new JTextField();
@@ -100,7 +100,7 @@ public class ResultPage {
 		item_5.setHorizontalAlignment(SwingConstants.CENTER);
 		item_5.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		item_5.setColumns(10);
-		item_5.setBounds(737, 451, 53, 35);
+		item_5.setBounds(738, 440, 53, 35);
 		orderPanel.add(item_5);
 		
 		item_4 = new JTextField();
@@ -108,7 +108,7 @@ public class ResultPage {
 		item_4.setHorizontalAlignment(SwingConstants.CENTER);
 		item_4.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		item_4.setColumns(10);
-		item_4.setBounds(737, 397, 53, 35);
+		item_4.setBounds(738, 386, 53, 35);
 		orderPanel.add(item_4);
 		
 		btnSave = new JButton("");
@@ -124,12 +124,12 @@ public class ResultPage {
 		        amount5.setText(item_5.getText());
 			}
 		});
-		btnSave.setIcon(new ImageIcon(ResultPage.class.getResource("/img_btn/save_btn.png")));
+		btnSave.setIcon(new ImageIcon(PageOrder.class.getResource("/img_btn/save_btn.png")));
 		btnSave.setBounds(728, 540, 125, 57);
 		orderPanel.add(btnSave);
 		
 		btnDiscard = new JButton("");
-		btnDiscard.setIcon(new ImageIcon(ResultPage.class.getResource("/img_btn/discard_btn.png")));
+		btnDiscard.setIcon(new ImageIcon(PageOrder.class.getResource("/img_btn/discard_btn.png")));
 		btnDiscard.setBounds(593, 540, 125, 57);
 		orderPanel.add(btnDiscard);
 		
@@ -137,55 +137,60 @@ public class ResultPage {
 		dec_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Integer val = Integer.parseInt(item_1.getText());
-				val--; item_1.setText(val.toString());
+				if (val <= 0) val = 0; else val--;
+				item_1.setText(val.toString());
 			}
 		});
-		dec_1.setIcon(new ImageIcon(ResultPage.class.getResource("/img_btn/dec_btn.png")));
-		dec_1.setBounds(692, 243, 36, 35);
+		dec_1.setIcon(new ImageIcon(PageOrder.class.getResource("/img_btn/dec_btn.png")));
+		dec_1.setBounds(693, 232, 36, 35);
 		orderPanel.add(dec_1);
 		
 		dec_2 = new JButton("");
 		dec_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Integer val = Integer.parseInt(item_2.getText());
-				val--; item_2.setText(val.toString());
+				if (val <= 0) val = 0; else val--;
+				item_2.setText(val.toString());
 			}
 		});
-		dec_2.setIcon(new ImageIcon(ResultPage.class.getResource("/img_btn/dec_btn.png")));
-		dec_2.setBounds(692, 292, 36, 35);
+		dec_2.setIcon(new ImageIcon(PageOrder.class.getResource("/img_btn/dec_btn.png")));
+		dec_2.setBounds(693, 281, 36, 35);
 		orderPanel.add(dec_2);
 		
 		dec_3 = new JButton("");
 		dec_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Integer val = Integer.parseInt(item_3.getText());
-				val--; item_3.setText(val.toString());
+				if (val <= 0) val = 0; else val--;
+				item_3.setText(val.toString());
 			}
 		});
-		dec_3.setIcon(new ImageIcon(ResultPage.class.getResource("/img_btn/dec_btn.png")));
-		dec_3.setBounds(692, 346, 36, 35);
+		dec_3.setIcon(new ImageIcon(PageOrder.class.getResource("/img_btn/dec_btn.png")));
+		dec_3.setBounds(693, 335, 36, 35);
 		orderPanel.add(dec_3);
 		
 		dec_4 = new JButton("");
 		dec_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Integer val = Integer.parseInt(item_4.getText());
-				val--; item_4.setText(val.toString());
+				if (val <= 0) val = 0; else val--;
+				item_4.setText(val.toString());
 			}
 		});
-		dec_4.setIcon(new ImageIcon(ResultPage.class.getResource("/img_btn/dec_btn.png")));
-		dec_4.setBounds(692, 397, 36, 35);
+		dec_4.setIcon(new ImageIcon(PageOrder.class.getResource("/img_btn/dec_btn.png")));
+		dec_4.setBounds(693, 386, 36, 35);
 		orderPanel.add(dec_4);
 		
 		dec_5 = new JButton("");
 		dec_5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Integer val = Integer.parseInt(item_5.getText());
-				val--; item_5.setText(val.toString());
+				if (val <= 0) val = 0; else val--;
+				item_5.setText(val.toString());
 			}
 		});
-		dec_5.setIcon(new ImageIcon(ResultPage.class.getResource("/img_btn/dec_btn.png")));
-		dec_5.setBounds(692, 451, 36, 35);
+		dec_5.setIcon(new ImageIcon(PageOrder.class.getResource("/img_btn/dec_btn.png")));
+		dec_5.setBounds(693, 440, 36, 35);
 		orderPanel.add(dec_5);
 		
 		inc_1 = new JButton("");
@@ -195,8 +200,8 @@ public class ResultPage {
 				val++; item_1.setText(val.toString());
 			}
 		});
-		inc_1.setIcon(new ImageIcon(ResultPage.class.getResource("/img_btn/inc_btn.png")));
-		inc_1.setBounds(798, 243, 36, 35);
+		inc_1.setIcon(new ImageIcon(PageOrder.class.getResource("/img_btn/inc_btn.png")));
+		inc_1.setBounds(799, 232, 36, 35);
 		orderPanel.add(inc_1);
 		
 		inc_2 = new JButton("");
@@ -206,8 +211,8 @@ public class ResultPage {
 				val++; item_2.setText(val.toString());
 			}
 		});
-		inc_2.setIcon(new ImageIcon(ResultPage.class.getResource("/img_btn/inc_btn.png")));
-		inc_2.setBounds(798, 292, 36, 35);
+		inc_2.setIcon(new ImageIcon(PageOrder.class.getResource("/img_btn/inc_btn.png")));
+		inc_2.setBounds(799, 281, 36, 35);
 		orderPanel.add(inc_2);
 		
 		inc_3 = new JButton("");
@@ -217,8 +222,8 @@ public class ResultPage {
 				val++; item_3.setText(val.toString());
 			}
 		});
-		inc_3.setIcon(new ImageIcon(ResultPage.class.getResource("/img_btn/inc_btn.png")));
-		inc_3.setBounds(798, 346, 36, 35);
+		inc_3.setIcon(new ImageIcon(PageOrder.class.getResource("/img_btn/inc_btn.png")));
+		inc_3.setBounds(799, 335, 36, 35);
 		orderPanel.add(inc_3);
 		
 		inc_4 = new JButton("");
@@ -228,8 +233,8 @@ public class ResultPage {
 				val++; item_4.setText(val.toString());
 			}
 		});
-		inc_4.setIcon(new ImageIcon(ResultPage.class.getResource("/img_btn/inc_btn.png")));
-		inc_4.setBounds(798, 397, 36, 35);
+		inc_4.setIcon(new ImageIcon(PageOrder.class.getResource("/img_btn/inc_btn.png")));
+		inc_4.setBounds(799, 386, 36, 35);
 		orderPanel.add(inc_4);
 		
 		inc_5 = new JButton("");
@@ -239,13 +244,13 @@ public class ResultPage {
 				val++; item_5.setText(val.toString());
 			}
 		});
-		inc_5.setIcon(new ImageIcon(ResultPage.class.getResource("/img_btn/inc_btn.png")));
-		inc_5.setBounds(798, 451, 36, 35);
+		inc_5.setIcon(new ImageIcon(PageOrder.class.getResource("/img_btn/inc_btn.png")));
+		inc_5.setBounds(799, 440, 36, 35);
 		orderPanel.add(inc_5);
 		
 		JLabel border = new JLabel("");
 		border.setHorizontalAlignment(SwingConstants.CENTER);
-		border.setIcon(new ImageIcon(ResultPage.class.getResource("/img_pages/ResultPage.png")));
+		border.setIcon(new ImageIcon(PageOrder.class.getResource("/img_pages/OrderPage.png")));
 		border.setBounds(0, 0, 994, 621);
 		orderPanel.add(border);
 	}
@@ -299,7 +304,7 @@ public class ResultPage {
 			public void actionPerformed(ActionEvent e) {
 				int dialogResult = JOptionPane.showConfirmDialog(null, "Are you sure the input is correct?", "Confirmation", JOptionPane.YES_NO_OPTION);
 				if (dialogResult == JOptionPane.YES_OPTION) {
-					ResultController.addToDatabase(0, new Date(), 
+					OrderController.addToDatabase(0, new Date(), 
 							Integer.parseInt(amount1.getText()),
 							Integer.parseInt(amount2.getText()), 
 							Integer.parseInt(amount3.getText()),
@@ -309,7 +314,7 @@ public class ResultPage {
 				}
 			}
 		});
-		btnSave.setIcon(new ImageIcon(ResultPage.class.getResource("/img_btn/proceed_btn.png")));
+		btnSave.setIcon(new ImageIcon(PageOrder.class.getResource("/img_btn/proceed_btn.png")));
 		btnSave.setBounds(728, 540, 125, 57);
 		confirmPanel.add(btnSave);
 		
@@ -321,13 +326,13 @@ public class ResultPage {
 		        cl.show(cards, ORDERPANEL);
 			}
 		});
-		btnDiscard.setIcon(new ImageIcon(ResultPage.class.getResource("/img_btn/cancel_btn.png")));
+		btnDiscard.setIcon(new ImageIcon(PageOrder.class.getResource("/img_btn/cancel_btn.png")));
 		btnDiscard.setBounds(593, 540, 125, 57);
 		confirmPanel.add(btnDiscard);
 		
 		JLabel border = new JLabel("");
 		border.setHorizontalAlignment(SwingConstants.CENTER);
-		border.setIcon(new ImageIcon(ResultPage.class.getResource("/img_pages/ConfirmPage.png")));
+		border.setIcon(new ImageIcon(PageOrder.class.getResource("/img_pages/ConfirmPage.png")));
 		border.setBounds(0, 0, 994, 621);
 		confirmPanel.add(border);
 	}
@@ -335,7 +340,7 @@ public class ResultPage {
 	/**
 	 * Create the application.
 	 */
-	public ResultPage() {
+	public PageOrder() {
 		initialize();
 	}
 
