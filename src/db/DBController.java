@@ -47,7 +47,6 @@ public class DBController {
 	public static ResultSet queryDatabase(String query) {
 		ResultSet rs = null;
 		PreparedStatement ps;
-		conn = connectDatabase();
 		try {
 			if (query.startsWith("SELECT")) {
 				ps = conn.prepareStatement(query);

@@ -343,7 +343,7 @@ public class ResultPage {
 					JOptionPane.showMessageDialog(null, "Order entry has been inserted successfully!", "Notification", JOptionPane.INFORMATION_MESSAGE);
 					//close window or return to dashboard
 					try {
-						DashboardCashierPage window = new DashboardCashierPage();
+						DashboardSMPage window = new DashboardSMPage();
 						window.frame.setVisible(true);
 						frame.setVisible(false); //you can't see me!
 						frame.dispose(); //Destroy the JFrame object

@@ -175,7 +175,7 @@ public class EstimationPage {
 		panel.add(endDate);
 
 		double averageAcc = InfoEstimation.calculateAverageAccuracy();
-		String percentage = String.format("%.2f", averageAcc) + " %";
+		String percentage = String.format("%.2f", averageAcc * 100.0) + " %";
 		JLabel avgAcc = new JLabel(percentage);
 		avgAcc.setHorizontalAlignment(SwingConstants.CENTER);
 		avgAcc.setForeground(new Color(112, 68, 160));

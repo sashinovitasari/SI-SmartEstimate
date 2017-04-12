@@ -80,7 +80,7 @@ public class DashboardCashierPage {
 				}
 			}
 		});
-		btnLogOut.setBounds(854, 56, 95, 31);
+		btnLogOut.setBounds(825, 40, 125, 57);
 		panel.add(btnLogOut);
 		
 		JButton btnSales = new JButton("");

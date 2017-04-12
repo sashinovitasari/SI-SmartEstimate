@@ -22,9 +22,11 @@ import order.PageOrder;
 
 import java.awt.Font;
 import java.awt.GridBagConstraints;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 import java.util.ArrayList;
 
 import javax.swing.JScrollPane;
@@ -100,7 +102,6 @@ public class DashboardSMPage {
 		btnEstimate.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnEstimate.setOpaque(false);
 		btnEstimate.setContentAreaFilled(false);
-		btnEstimate.setBorderPainted(false);
 		btnEstimate.setIcon(new ImageIcon(DashboardSMPage.class.getResource("/img_btn/estimate_btn.png")));
 		btnEstimate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -171,7 +172,10 @@ public class DashboardSMPage {
 		
 		panel.add(today_desc);
 		
-		JLabel today_temp = new JLabel(today.getString("temp"));
+		Double temp = Double.parseDouble(today.getString("temp"));
+		temp = (temp - 32.0) * 5.0 / 9.0;
+		
+		JLabel today_temp = new JLabel(String.format("%.0f", temp));
 		today_temp.setForeground(new Color(112, 68, 160));
 		today_temp.setFont(new Font("Tahoma", Font.BOLD, 16));
 		today_temp.setBounds(113, 296, 36, 22);
@@ -185,7 +189,7 @@ public class DashboardSMPage {
 		today_date.setBounds(39, 313, 56, 22);
 		panel.add(today_date);
 		
-		JLabel lblOF = new JLabel("\u00B0 F");
+		JLabel lblOF = new JLabel("\u00B0 C");
 		lblOF.setForeground(new Color(112, 68, 160));
 		lblOF.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lblOF.setBounds(139, 296, 36, 22);
@@ -326,7 +330,7 @@ public class DashboardSMPage {
 					e.printStackTrace();
 				}
 								
-				JLabel lblRp = new JLabel("Rp. "+(valMon*40000));
+				JLabel lblRp = new JLabel("Rp. "+(NumberFormat.getNumberInstance(Locale.US).format(valMon * 40000)));
 				lblRp.setForeground(new Color(34, 139, 34));
 				lblRp.setFont(new Font("Microsoft YaHei", Font.BOLD, 16));
 				lblRp.setBounds(167, 471, 144, 34);
@@ -362,7 +366,7 @@ public class DashboardSMPage {
 				JButton btnLogout = new JButton("");
 				btnLogout.setFont(new Font("Tahoma", Font.BOLD, 15));
 				btnLogout.setIcon(new ImageIcon(DashboardSMPage.class.getResource("/img_btn/logout_btn.png")));
-				btnLogout.setBounds(827, 47, 117, 47);
+				btnLogout.setBounds(825, 40, 125, 57);
 				btnLogout.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						try { //Change to LOGIN PAGE

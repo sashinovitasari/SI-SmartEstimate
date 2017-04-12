@@ -10,3 +10,5 @@ ALTER TABLE `pesanan_produk` DROP PRIMARY KEY;
 ALTER TABLE `pesanan_produk` CHANGE `id_order` `id_order` INT(11) NULL DEFAULT NULL;
 
 ALTER TABLE info_cuaca ADD tanggal DATETIME;
+
+Alter table 'info_berita' add 'url_berita' varchar (500)
