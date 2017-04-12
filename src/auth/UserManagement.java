@@ -1,8 +1,13 @@
 package auth;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.Statement;
 
+import dashboard.DashboardCashierPage;
+import dashboard.DashboardSMPage;
 import db.DBController;
+import news.InfoNews;
 
 public class UserManagement {
 	
@@ -26,7 +31,9 @@ public class UserManagement {
 				+ fullname + "', '" + String.valueOf(password) + "', '" + "1" + "', '" 
 				+ (position.equals("Store Manager") ? "s" : "c") + "', '" 
 				+ username + "')";
+		DBController.connectDatabase();
 		ResultSet rs = DBController.queryDatabase(query);
+		DBController.closeDatabase();
 		
 		return REGISTER_SUCCESS;
 	}
@@ -37,7 +44,9 @@ public class UserManagement {
 		} else if (validateUser(username, password)) {
 			String query = "UPDATE user SET login_state = 1 WHERE username = '" + username 
 					+ "' AND password = '" + String.valueOf(password) + "'";
+			DBController.connectDatabase();
 			DBController.queryDatabase(query);
+			DBController.closeDatabase();
 			return LOGIN_SUCCESS;
 		} else {
 			return AUTHENTICATION_FAILED;
@@ -50,34 +59,50 @@ public class UserManagement {
 	
 	private static boolean matchUserID(String username) {
 		String query = "SELECT * FROM user WHERE username = '" + username + "'";
+		DBController.connectDatabase();
 		ResultSet rs = DBController.queryDatabase(query);
-		
+		boolean result = false;
 		try {
-			if(rs.next()) {
-				return true;
-			} else {
-				return false;
-			}
+			result = rs.next();
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			DBController.closeDatabase();
 		}
-		return false;
+		
+		return result;
 	}
 	
 	private static boolean validateUser(String username, char[] password) {
 		String query = "SELECT * FROM user WHERE username = '" + username 
 				+ "' AND password = '" + String.valueOf(password) + "'";
+		DBController.connectDatabase();
 		ResultSet rs = DBController.queryDatabase(query);
-		
+		boolean result = true;
 		try {
-			if(rs.next()) {
-				return true;
-			} else {
-				return false;
-			}
+			result = rs.next();
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			DBController.closeDatabase();
 		}
-		return true;
+		return result;
+	}
+	
+	public static String getRole(String username){
+		String prn = "s";	
+		Connection con = DBController.connectDatabase();
+		Statement stmt = null;
+		try {
+			stmt = con.createStatement();
+			String query = "SELECT position FROM user WHERE username=\""+username+"\"";
+			ResultSet res = stmt.executeQuery(query);
+			while (res.next()) prn = res.getString("position");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		DBController.closeDatabase();
+		return prn;	
 	}
 }

@@ -13,10 +13,13 @@ import javax.swing.SwingConstants;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import auth.PageAuth;
 import db.DBController;
 import estimation.EstimationPage;
 import weather.InfoWeather;
 import news.InfoNews;
+import order.PageOrder;
+
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.text.SimpleDateFormat;
@@ -51,10 +54,11 @@ import javax.swing.border.BevelBorder;
 import javax.swing.JScrollBar;
 import java.awt.ScrollPane;
 import javax.swing.ScrollPaneConstants;
-
+import java.awt.SystemColor;
+import javax.swing.UIManager;
 public class DashboardSMPage {
 
-	private JFrame frame;
+	public JFrame frame;
 
 	/**
 	 * Launch the application.
@@ -91,9 +95,31 @@ public class DashboardSMPage {
 		frame.getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
 		
+		//----------------------
+		JButton btnEstimate = new JButton("");
+		btnEstimate.setFont(new Font("Tahoma", Font.BOLD, 14));
+		btnEstimate.setOpaque(false);
+		btnEstimate.setContentAreaFilled(false);
+		btnEstimate.setBorderPainted(false);
+		btnEstimate.setIcon(new ImageIcon(DashboardSMPage.class.getResource("/img_btn/estimate_btn.png")));
+		btnEstimate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					EstimationPage window = new EstimationPage();
+					window.frame.setVisible(true);
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+		btnEstimate.setBounds(419, 280, 126, 55);
+		panel.add(btnEstimate);
+		//-----------------------
+		
 		JLabel label = new JLabel("");
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		label.setIcon(new ImageIcon(DashboardSMPage.class.getResource("/img_weather/tomorrow_forecast.png")));
+		
 		label.setBounds(194, 266, 117, 15);
 		panel.add(label);
 		
@@ -126,6 +152,20 @@ public class DashboardSMPage {
 		}
 		
 		panel.add(today_weather);
+		
+		JButton btnPowerButton = new JButton("");
+		btnPowerButton.setIcon(new ImageIcon(DashboardSMPage.class.getResource("/img_btn/power_btn.png")));
+		btnPowerButton.setOpaque(false);
+		btnPowerButton.setContentAreaFilled(false);
+		btnPowerButton.setBorderPainted(false);
+		btnPowerButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
+		btnPowerButton.setBounds(468, 456, 48, 40);
+		panel.add(btnPowerButton);
+		
 		panel.add(today_desc);
 		
 		JLabel today_temp = new JLabel(today.getString("temp"));
@@ -156,7 +196,7 @@ public class DashboardSMPage {
 		JLabel weather_1 = new JLabel("");
 		if (tomorrow.getString("text").contains("Cloudy")) {
 			weather_1.setIcon(new ImageIcon(DashboardSMPage.class.getResource("/img_weather/cloudy.png")));
-		} else if (tomorrow.getString("text").contains("Rain") || today.getString("text").contains("Shower")) {
+		} else if (tomorrow.getString("text").contains("Rain") || tomorrow.getString("text").contains("Shower")) {
 			weather_1.setIcon(new ImageIcon(DashboardSMPage.class.getResource("/img_weather/rain.png")));
 		} else if (tomorrow.getString("text").contains("Thunder")) {
 			weather_1.setIcon(new ImageIcon(DashboardSMPage.class.getResource("/img_weather/thunderstorm.png")));
@@ -182,7 +222,7 @@ public class DashboardSMPage {
 		JLabel weather_2 = new JLabel("");
 		if (next_tomorrow.getString("text").contains("Cloudy")) {
 			weather_2.setIcon(new ImageIcon(DashboardSMPage.class.getResource("/img_weather/cloudy.png")));
-		} else if (next_tomorrow.getString("text").contains("Rain") || today.getString("text").contains("Shower")) {
+		} else if (next_tomorrow.getString("text").contains("Rain") || next_tomorrow.getString("text").contains("Shower")) {
 			weather_2.setIcon(new ImageIcon(DashboardSMPage.class.getResource("/img_weather/rain.png")));
 		} else if (next_tomorrow.getString("text").contains("Thunder")) {
 			weather_2.setIcon(new ImageIcon(DashboardSMPage.class.getResource("/img_weather/thunderstorm.png")));
@@ -205,7 +245,7 @@ public class DashboardSMPage {
 		JLabel weather_3 = new JLabel("");
 		if (next2_tomorrow.getString("text").contains("Cloudy")) {
 			weather_3.setIcon(new ImageIcon(DashboardSMPage.class.getResource("/img_weather/cloudy.png")));
-		} else if (next2_tomorrow.getString("text").contains("Rain") || today.getString("text").contains("Shower")) {
+		} else if (next2_tomorrow.getString("text").contains("Rain") || next2_tomorrow.getString("text").contains("Shower")) {
 			weather_3.setIcon(new ImageIcon(DashboardSMPage.class.getResource("/img_weather/rain.png")));
 		} else if (next2_tomorrow.getString("text").contains("Thunder")) {
 			weather_3.setIcon(new ImageIcon(DashboardSMPage.class.getResource("/img_weather/thunderstorm.png")));
@@ -226,150 +266,185 @@ public class DashboardSMPage {
 		panel.add(date_3);
 		
 		JLabel border = new JLabel("");
-		border.setHorizontalAlignment(SwingConstants.LEFT);
+		border.setBackground(SystemColor.menu);
+		border.setHorizontalAlignment(SwingConstants.CENTER);
 		border.setIcon(new ImageIcon(EstimationPage.class.getResource("/img_pages/DashboardPage.png")));
 		border.setBounds(-10, 0, 994, 621);
 		panel.add(border);
 		
 		//---------------NEWS---------------------------------------
 		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		scrollPane.setBounds(673, 196, 241, 200);
-		panel.add(scrollPane);
-		
-		JPanel panel_2 = new JPanel();
-		panel_2.setBackground(Color.WHITE);
-		scrollPane.setViewportView(panel_2);
-		GridBagLayout gbl_panel_2 = new GridBagLayout();
-		gbl_panel_2.columnWidths = new int[]{0};
-		gbl_panel_2.rowHeights = new int[]{0};
-		gbl_panel_2.columnWeights = new double[]{0};
-		gbl_panel_2.rowWeights = new double[]{0};
-		panel_2.setLayout(gbl_panel_2);
-		
+				JScrollPane scrollPane = new JScrollPane();
+				scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+				scrollPane.setBounds(673, 196, 241, 200);
+				panel.add(scrollPane);
 				
-		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(Color.WHITE);
-		GridBagConstraints gbc = new GridBagConstraints();
-		gbc.anchor = GridBagConstraints.NORTHWEST;
-		panel_1.setBounds(683, 198, 231, 198);
-		panel.add(panel_1,gbc);
-		
-		JLabel lblNewLabel = new JLabel("You've done well yesterday.\r\n\r\n");
-		lblNewLabel.setForeground(new Color(139, 0, 139));
-		lblNewLabel.setBounds(156, 427, 144, 22);
-		panel.add(lblNewLabel);
+				JPanel panel_2 = new JPanel();
+				panel_2.setBackground(Color.WHITE);
+				scrollPane.setViewportView(panel_2);
+				GridBagLayout gbl_panel_2 = new GridBagLayout();
+				gbl_panel_2.columnWidths = new int[]{0};
+				gbl_panel_2.rowHeights = new int[]{0};
+				gbl_panel_2.columnWeights = new double[]{0};
+				gbl_panel_2.rowWeights = new double[]{0};
+				panel_2.setLayout(gbl_panel_2);
 				
-		ResultSet resSum = null;
-		
-		int valMon = 0;
-
-		Connection con = DBController.connectDatabase();
-		Statement stmt = null;
-		try {
-			stmt = con.createStatement();
-			String querySum ="select sum(jumlah_penjualan) as jml "
-						+ "from penjualan_produk,data_penjualan"
-						+ "where penjualan_produk.id_penjualan = data_penjualan.id_penjualan"
-						+ "AND DATEDIFF(data_penjualan.tanggal_penjualan,NOW())=1";
-			 resSum = stmt.executeQuery(querySum);
-			try {
-					while (resSum.next()) valMon = resSum.getInt("jml");
-			} catch (SQLException e2) {
-					// TODO Auto-generated catch block
-					e2.printStackTrace();
-			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 						
-		JLabel lblRp = new JLabel("Rp. "+(valMon*40000));
-		lblRp.setForeground(new Color(34, 139, 34));
-		lblRp.setFont(new Font("Microsoft YaHei", Font.BOLD, 16));
-		lblRp.setBounds(167, 471, 144, 34);
-		panel.add(lblRp);
-		
-		JLabel lblKeepItUp = new JLabel("Keep it up!");
-		lblKeepItUp.setForeground(new Color(139, 0, 139));
-		lblKeepItUp.setBounds(159, 445, 88, 14);
-		panel.add(lblKeepItUp);
-		
-								
-		ResultSet resNews = InfoNews.showNewsInfo();
-		ArrayList<JButton> arrButton = new ArrayList<JButton>();
-		ArrayList<JTextArea> arrDesc=new ArrayList<JTextArea>();
-		ArrayList<JTextArea> arrTitle = new ArrayList<JTextArea>();;
-		
-		int i=0;
-		try {
-			while (resNews.next()){
-				//Icon a=new ImageIcon(DashboardSMPage.class.getResource("/img_btn/opnWeb_btn.png"));
-				JButton btn = new JButton("Read");
-				btn.setIcon(new ImageIcon(DashboardSMPage.class.getResource("/img_btn/opnWeb_btn.png")));
-				btn.setPreferredSize(new Dimension(20,20));
-				btn.setName(resNews.getString("url_berita"));
-				btn.addActionListener( new ActionListener()
-				{
-				    public void actionPerformed(ActionEvent e)
-				    {
-				    	String url="http://google.com";
-				    	try {
-				    		JButton o = (JButton)e.getSource();
-				    		url = o.getName();
-				    		java.awt.Desktop.getDesktop().browse(java.net.URI.create(url));
-				    	}
-				    	catch (java.io.IOException e1) {
-				    	     System.out.println(e1.getMessage());
-				    	}
-				    }
-				});
-							
-				JTextArea lblDesc = new JTextArea(resNews.getString("deskripsi"));
-				lblDesc.setFont(new Font("Tahoma", Font.PLAIN, 10));
-				lblDesc.setLineWrap(true);
-				lblDesc.setWrapStyleWord(true);
+				JPanel panel_1 = new JPanel();
+				panel_1.setBackground(Color.WHITE);
+				GridBagConstraints gbc = new GridBagConstraints();
+				gbc.anchor = GridBagConstraints.NORTHWEST;
+				panel_1.setBounds(683, 198, 231, 198);
+				panel.add(panel_1,gbc);
 				
-				JTextArea lblTitle = new JTextArea(resNews.getString("kategori"));
-				lblTitle.setFont(new Font("Tahoma", Font.BOLD, 11));
-				lblTitle.setLineWrap(true);
-				lblTitle.setWrapStyleWord(true);
-			        
-				arrButton.add(btn);
-				arrDesc.add(lblDesc);
-				arrTitle.add(lblTitle);		
+				JLabel lblNewLabel = new JLabel("You've done well yesterday.\r\n\r\n");
+				lblNewLabel.setForeground(new Color(139, 0, 139));
+				lblNewLabel.setBounds(156, 427, 144, 22);
+				panel.add(lblNewLabel);
+						
+				ResultSet resSum = null;
 				
-				gbc.fill = GridBagConstraints.EAST;
-				gbc.gridx = 0;
-			    gbc.gridy = i;
-			    gbc.ipady = 10;
-			    gbc.insets = new Insets(10,10,1,5);//int top, int left, int bottom, int right)
-			    panel_2.add(btn,gbc); 
-			    
-			    gbc.insets = new Insets(11,5,1,10);
-			    gbc.fill = GridBagConstraints.HORIZONTAL;
-			    gbc.gridx = 1;
-			    gbc.gridy = i; 
-			    panel_2.add(lblTitle,gbc);  
+				int valMon = 0;
 
-			    gbc.insets = new Insets(5,10,1,10);
-			    gbc.gridx = 0;
-			    gbc.gridy = 1+i; 
-			    gbc.gridwidth = 3;
-			    gbc.weightx = 1;
-			    gbc.weighty = 0;
-			    gbc.fill = GridBagConstraints.HORIZONTAL;
-			    //gbc.gridwidth = 2;
-			    panel_2.add(lblDesc,gbc);
-			    		    
-			    i+=2;
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}	
+				Connection con = DBController.connectDatabase();
+				Statement stmt = null;
+				try {
+					stmt = con.createStatement();
+					String querySum ="SELECT sum(jumlah_penjualan) AS jml FROM penjualan_produk,data_penjualan WHERE penjualan_produk.id_penjualan = data_penjualan.id_penjualan AND DATEDIFF(NOW(),data_penjualan.tanggal_penjualan)=1";
+					resSum = stmt.executeQuery(querySum);
+					try {
+							while (resSum.next()) valMon = resSum.getInt("jml");
+					} catch (SQLException e2) {
+							// TODO Auto-generated catch block
+							e2.printStackTrace();
+					}
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+								
+				JLabel lblRp = new JLabel("Rp. "+(valMon*40000));
+				lblRp.setForeground(new Color(34, 139, 34));
+				lblRp.setFont(new Font("Microsoft YaHei", Font.BOLD, 16));
+				lblRp.setBounds(167, 471, 144, 34);
+				panel.add(lblRp);
+				
+				JLabel lblKeepItUp = new JLabel("Keep it up!");
+				lblKeepItUp.setForeground(new Color(139, 0, 139));
+				lblKeepItUp.setBounds(159, 445, 88, 14);
+				panel.add(lblKeepItUp);
+				
+				JButton btnPlaceAnOrder = new JButton("");
+				btnPlaceAnOrder.setOpaque(false);
+				btnPlaceAnOrder.setContentAreaFilled(false);
+				btnPlaceAnOrder.setBorderPainted(false);
+				btnPlaceAnOrder.setBackground(UIManager.getColor("Panel.background"));
+				btnPlaceAnOrder.setFont(new Font("Tahoma", Font.BOLD, 11));
+				btnPlaceAnOrder.setIcon(new ImageIcon(DashboardSMPage.class.getResource("/img_btn/order_btn.png")));
+				btnPlaceAnOrder.setBounds(632, 431, 176, 81);
+				btnPlaceAnOrder.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						try {
+							PageOrder window = new PageOrder();
+							window.frame.setVisible(true);
+						} catch (Exception e1) {
+							e1.printStackTrace();
+						}
+					}
+				});
+				panel.add(btnPlaceAnOrder);
+				
+				JButton btnLogout = new JButton("");
+				btnLogout.setFont(new Font("Tahoma", Font.BOLD, 15));
+				btnLogout.setIcon(new ImageIcon(DashboardSMPage.class.getResource("/img_btn/logout_btn.png")));
+				btnLogout.setBounds(827, 47, 117, 47);
+				btnLogout.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						try {
+							PageAuth window = new PageAuth();
+							window.frame.setVisible(true);
+						} catch (Exception e1) {
+							e1.printStackTrace();
+						}
+					}
+				});
+				panel.add(btnLogout);
+				
+										
+				ResultSet resNews = InfoNews.showNewsInfo();
+				ArrayList<JButton> arrButton = new ArrayList<JButton>();
+				ArrayList<JTextArea> arrDesc=new ArrayList<JTextArea>();
+				ArrayList<JTextArea> arrTitle = new ArrayList<JTextArea>();;
+				
+				int i=0;
+				try {
+					while (resNews.next()){
+						//Icon a=new ImageIcon(DashboardSMPage.class.getResource("/img_btn/opnWeb_btn.png"));
+						JButton btn = new JButton("Read");
+						btn.setIcon(new ImageIcon(DashboardSMPage.class.getResource("/img_btn/opnWeb_btn.png")));
+						btn.setPreferredSize(new Dimension(20,20));
+						btn.setName(resNews.getString("url_berita"));
+						btn.addActionListener( new ActionListener()
+						{
+						    public void actionPerformed(ActionEvent e)
+						    {
+						    	String url="http://google.com";
+						    	try {
+						    		JButton o = (JButton)e.getSource();
+						    		url = o.getName();
+						    		java.awt.Desktop.getDesktop().browse(java.net.URI.create(url));
+						    	}
+						    	catch (java.io.IOException e1) {
+						    	     System.out.println(e1.getMessage());
+						    	}
+						    }
+						});
+									
+						JTextArea lblDesc = new JTextArea(resNews.getString("deskripsi"));
+						lblDesc.setFont(new Font("Tahoma", Font.PLAIN, 10));
+						lblDesc.setLineWrap(true);
+						lblDesc.setWrapStyleWord(true);
+						
+						JTextArea lblTitle = new JTextArea(resNews.getString("kategori"));
+						lblTitle.setFont(new Font("Tahoma", Font.BOLD, 11));
+						lblTitle.setLineWrap(true);
+						lblTitle.setWrapStyleWord(true);
+					        
+						arrButton.add(btn);
+						arrDesc.add(lblDesc);
+						arrTitle.add(lblTitle);		
+						
+						gbc.fill = GridBagConstraints.EAST;
+						gbc.gridx = 0;
+					    gbc.gridy = i;
+					    gbc.ipady = 10;
+					    gbc.insets = new Insets(10,10,1,5);//int top, int left, int bottom, int right)
+					    panel_2.add(btn,gbc); 
+					    
+					    gbc.insets = new Insets(11,5,1,10);
+					    gbc.fill = GridBagConstraints.HORIZONTAL;
+					    gbc.gridx = 1;
+					    gbc.gridy = i; 
+					    panel_2.add(lblTitle,gbc);  
+
+					    gbc.insets = new Insets(5,10,1,10);
+					    gbc.gridx = 0;
+					    gbc.gridy = 1+i; 
+					    gbc.gridwidth = 3;
+					    gbc.weightx = 1;
+					    gbc.weighty = 0;
+					    gbc.fill = GridBagConstraints.HORIZONTAL;
+					    //gbc.gridwidth = 2;
+					    panel_2.add(lblDesc,gbc);
+					    		    
+					    i+=2;
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}	
 		
+		DBController.closeDatabase();
 		frame.setBounds(0, 0, 1000, 650);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}

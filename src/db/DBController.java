@@ -8,6 +8,7 @@ public class DBController {
 	public static void main(String args[]) {
 		/*** CARA PAKAI DBController ***/
 		String query = "SELECT * FROM user";
+		
 		ResultSet rs = queryDatabase(query);
 		try {
 			while(rs.next()) {
@@ -17,11 +18,12 @@ public class DBController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		closeDatabase();
 		System.out.println("DONE");
 	}
 	
 	public static Connection connectDatabase() {
-		Connection conn = null;
+		conn = null;
 		try {
 			// create our mysql database connection
 			String myDriver = "org.gjt.mm.mysql.Driver";
@@ -30,14 +32,22 @@ public class DBController {
 			conn = DriverManager.getConnection(myUrl, "root", "");
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
+		} 
 		return conn;
+	}
+	public static void closeDatabase() {
+		try {
+			conn.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 	public static ResultSet queryDatabase(String query) {
 		ResultSet rs = null;
-		Connection conn = connectDatabase();
 		PreparedStatement ps;
+		conn = connectDatabase();
 		try {
 			if (query.startsWith("SELECT")) {
 				ps = conn.prepareStatement(query);
@@ -53,10 +63,7 @@ public class DBController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return rs;
-	}
-	
-	public static void closeDatabase() {
 		
+		return rs;
 	}
 }

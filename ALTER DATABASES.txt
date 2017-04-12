@@ -3,3 +3,11 @@ ALTER TABLE user ADD position char(1);
 ALTER TABLE user DROP COLUMN email;
 ALTER TABLE user ADD username varchar(255);
 ALTER TABLE user MODIFY ID_user INT PRIMARY KEY AUTO_INCREMENT;
+
+
+ALTER TABLE `pesanan_produk` CHANGE `id_order` `id_order` INT(11) NOT NULL;
+ALTER TABLE `pesanan_produk` DROP PRIMARY KEY;
+ALTER TABLE `pesanan_produk` CHANGE `id_order` `id_order` INT(11) NULL DEFAULT NULL;
+
+ALTER TABLE info_cuaca ADD tanggal DATETIME;
+ALTER TABLE info_berita ADD url_berita varchar (500);
