@@ -95,7 +95,7 @@ public class DashboardSMPage {
 		frame.getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
 		
-		//----------------------
+		//Change to estimation windows
 		JButton btnEstimate = new JButton("");
 		btnEstimate.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnEstimate.setOpaque(false);
@@ -153,6 +153,7 @@ public class DashboardSMPage {
 		
 		panel.add(today_weather);
 		
+		//Close program
 		JButton btnPowerButton = new JButton("");
 		btnPowerButton.setIcon(new ImageIcon(DashboardSMPage.class.getResource("/img_btn/power_btn.png")));
 		btnPowerButton.setOpaque(false);
@@ -334,6 +335,7 @@ public class DashboardSMPage {
 				lblKeepItUp.setBounds(159, 445, 88, 14);
 				panel.add(lblKeepItUp);
 				
+				//Change to order's windows
 				JButton btnPlaceAnOrder = new JButton("");
 				btnPlaceAnOrder.setOpaque(false);
 				btnPlaceAnOrder.setContentAreaFilled(false);
@@ -354,6 +356,7 @@ public class DashboardSMPage {
 				});
 				panel.add(btnPlaceAnOrder);
 				
+				//Change to login windows (log out)
 				JButton btnLogout = new JButton("");
 				btnLogout.setFont(new Font("Tahoma", Font.BOLD, 15));
 				btnLogout.setIcon(new ImageIcon(DashboardSMPage.class.getResource("/img_btn/logout_btn.png")));
@@ -369,8 +372,7 @@ public class DashboardSMPage {
 					}
 				});
 				panel.add(btnLogout);
-				
-										
+							
 				ResultSet resNews = InfoNews.showNewsInfo();
 				ArrayList<JButton> arrButton = new ArrayList<JButton>();
 				ArrayList<JTextArea> arrDesc=new ArrayList<JTextArea>();
@@ -379,7 +381,6 @@ public class DashboardSMPage {
 				int i=0;
 				try {
 					while (resNews.next()){
-						//Icon a=new ImageIcon(DashboardSMPage.class.getResource("/img_btn/opnWeb_btn.png"));
 						JButton btn = new JButton("Read");
 						btn.setIcon(new ImageIcon(DashboardSMPage.class.getResource("/img_btn/opnWeb_btn.png")));
 						btn.setPreferredSize(new Dimension(20,20));
