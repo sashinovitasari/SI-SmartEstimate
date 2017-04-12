@@ -18,6 +18,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import dashboard.DashboardCashierPage;
+import dashboard.DashboardSMPage;
 import order.OrderController;
 import order.PageOrder;
 
@@ -145,6 +147,18 @@ public class ResultPage {
 		orderPanel.add(btnSave);
 		
 		btnDiscard = new JButton("");
+		btnDiscard.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					DashboardSMPage window = new DashboardSMPage();
+					window.frame.setVisible(true);
+					frame.setVisible(false); //you can't see me!
+					frame.dispose(); //Destroy the JFrame object
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
 		btnDiscard.setIcon(new ImageIcon(ResultPage.class.getResource("/img_btn/discard_btn.png")));
 		btnDiscard.setBounds(593, 540, 125, 57);
 		orderPanel.add(btnDiscard);
@@ -328,8 +342,15 @@ public class ResultPage {
 							Integer.parseInt(amount5.getText()));
 					JOptionPane.showMessageDialog(null, "Order entry has been inserted successfully!", "Notification", JOptionPane.INFORMATION_MESSAGE);
 					//close window or return to dashboard
-					frame.setVisible(false); //you can't see me!
-					frame.dispose(); //Destroy the JFrame object
+					try {
+						DashboardCashierPage window = new DashboardCashierPage();
+						window.frame.setVisible(true);
+						frame.setVisible(false); //you can't see me!
+						frame.dispose(); //Destroy the JFrame object
+					} catch (Exception e1) {
+						e1.printStackTrace();
+					}
+					
 				}
 			}
 		});
@@ -377,6 +398,14 @@ public class ResultPage {
 		dashboardButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//close window or return to dashboard
+				try {
+					DashboardSMPage window = new DashboardSMPage();
+					window.frame.setVisible(true);
+					frame.setVisible(false); //you can't see me!
+					frame.dispose(); //Destroy the JFrame object
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
 				frame.setVisible(false); //you can't see me!
 				frame.dispose(); //Destroy the JFrame object
 			}
@@ -391,7 +420,7 @@ public class ResultPage {
 		cards.add(orderPanel, ORDERPANEL);
 		cards.add(confirmPanel, CONFIRMPANEL);
 		
-		frame.add(cards, BorderLayout.CENTER);
+		frame.getContentPane().add(cards, BorderLayout.CENTER);
 		
 		frame.setBounds(0, 0, 1000, 650);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

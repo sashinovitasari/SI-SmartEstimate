@@ -22,6 +22,8 @@ import javax.swing.SwingWorker;
 import com.toedter.calendar.JCalendar;
 import com.toedter.calendar.JDateChooser;
 
+import dashboard.DashboardCashierPage;
+import dashboard.DashboardSMPage;
 import order.PageOrder;
 
 import javax.swing.JButton;
@@ -75,6 +77,14 @@ public class EstimationPage {
 		dashboardButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//close window or return to dashboard
+				try {
+					DashboardSMPage window = new DashboardSMPage();
+					window.frame.setVisible(true);
+					frame.setVisible(false); //you can't see me!
+					frame.dispose(); //Destroy the JFrame object
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
 				frame.setVisible(false); //you can't see me!
 				frame.dispose(); //Destroy the JFrame object
 			}

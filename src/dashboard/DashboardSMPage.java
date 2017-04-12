@@ -95,7 +95,7 @@ public class DashboardSMPage {
 		frame.getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
 		
-		//Change to estimation windows
+		//----------------------
 		JButton btnEstimate = new JButton("");
 		btnEstimate.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnEstimate.setOpaque(false);
@@ -104,9 +104,11 @@ public class DashboardSMPage {
 		btnEstimate.setIcon(new ImageIcon(DashboardSMPage.class.getResource("/img_btn/estimate_btn.png")));
 		btnEstimate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try {
+				try {//Change to ESTIMATION PAGE
 					EstimationPage window = new EstimationPage();
 					window.frame.setVisible(true);
+					frame.setVisible(false); //you can't see me!
+					frame.dispose(); //Destroy the JFrame object
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
@@ -153,13 +155,13 @@ public class DashboardSMPage {
 		
 		panel.add(today_weather);
 		
-		//Close program
 		JButton btnPowerButton = new JButton("");
 		btnPowerButton.setIcon(new ImageIcon(DashboardSMPage.class.getResource("/img_btn/power_btn.png")));
 		btnPowerButton.setOpaque(false);
 		btnPowerButton.setContentAreaFilled(false);
 		btnPowerButton.setBorderPainted(false);
 		btnPowerButton.addActionListener(new ActionListener() {
+			//Close program
 			public void actionPerformed(ActionEvent e) {
 				System.exit(0);
 			}
@@ -335,7 +337,6 @@ public class DashboardSMPage {
 				lblKeepItUp.setBounds(159, 445, 88, 14);
 				panel.add(lblKeepItUp);
 				
-				//Change to order's windows
 				JButton btnPlaceAnOrder = new JButton("");
 				btnPlaceAnOrder.setOpaque(false);
 				btnPlaceAnOrder.setContentAreaFilled(false);
@@ -346,9 +347,11 @@ public class DashboardSMPage {
 				btnPlaceAnOrder.setBounds(632, 431, 176, 81);
 				btnPlaceAnOrder.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						try {
+						try {//Change to ORDER PAGE
 							PageOrder window = new PageOrder();
 							window.frame.setVisible(true);
+							frame.setVisible(false); //you can't see me!
+							frame.dispose(); //Destroy the JFrame object
 						} catch (Exception e1) {
 							e1.printStackTrace();
 						}
@@ -356,23 +359,25 @@ public class DashboardSMPage {
 				});
 				panel.add(btnPlaceAnOrder);
 				
-				//Change to login windows (log out)
 				JButton btnLogout = new JButton("");
 				btnLogout.setFont(new Font("Tahoma", Font.BOLD, 15));
 				btnLogout.setIcon(new ImageIcon(DashboardSMPage.class.getResource("/img_btn/logout_btn.png")));
 				btnLogout.setBounds(827, 47, 117, 47);
 				btnLogout.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						try {
+						try { //Change to LOGIN PAGE
 							PageAuth window = new PageAuth();
 							window.frame.setVisible(true);
+							frame.setVisible(false); //you can't see me!
+							frame.dispose(); //Destroy the JFrame object
 						} catch (Exception e1) {
 							e1.printStackTrace();
 						}
 					}
 				});
 				panel.add(btnLogout);
-							
+				
+										
 				ResultSet resNews = InfoNews.showNewsInfo();
 				ArrayList<JButton> arrButton = new ArrayList<JButton>();
 				ArrayList<JTextArea> arrDesc=new ArrayList<JTextArea>();
@@ -381,6 +386,7 @@ public class DashboardSMPage {
 				int i=0;
 				try {
 					while (resNews.next()){
+						//Icon a=new ImageIcon(DashboardSMPage.class.getResource("/img_btn/opnWeb_btn.png"));
 						JButton btn = new JButton("Read");
 						btn.setIcon(new ImageIcon(DashboardSMPage.class.getResource("/img_btn/opnWeb_btn.png")));
 						btn.setPreferredSize(new Dimension(20,20));

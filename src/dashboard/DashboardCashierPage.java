@@ -68,12 +68,13 @@ public class DashboardCashierPage {
 		btnLogOut.setContentAreaFilled(false);
 		btnLogOut.setBorderPainted(false);
 		btnLogOut.setIcon(new ImageIcon(DashboardSMPage.class.getResource("/img_btn/logout_btn.png")));
-		//Change to login windows
 		btnLogOut.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try {
+				try {//Change to LOGIN PAGE
 					PageAuth window = new PageAuth();
 					window.frame.setVisible(true);
+					frame.setVisible(false); //you can't see me!
+					frame.dispose(); //Destroy the JFrame object
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
@@ -87,12 +88,13 @@ public class DashboardCashierPage {
 		btnSales.setContentAreaFilled(false);
 		btnSales.setBorderPainted(false);
 		btnSales.setIcon(new ImageIcon(DashboardSMPage.class.getResource("/img_btn/sales_btn.png")));
-		//Change to input sales windows
 		btnSales.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try {
+				try { //Change to LOGIN PAGE
 					PageSalesInput window = new PageSalesInput();
 					window.frame.setVisible(true);
+					frame.setVisible(false); //you can't see me!
+					frame.dispose(); //Destroy the JFrame object
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
