@@ -6,13 +6,19 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Window;
+import java.awt.Dialog.ModalityType;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
+import javax.swing.AbstractButton;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -20,6 +26,8 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
 
 public class PageAuth {
 
@@ -48,12 +56,32 @@ public class PageAuth {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				try {
-					PageAuth window = new PageAuth();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+				PageSplash window = new PageSplash();
+				window.frame.setVisible(true);
+				
+				SwingWorker<Void, Void> mySwingWorker = new SwingWorker<Void, Void>(){
+			        @Override
+			        protected Void doInBackground() throws Exception {
+			        	Thread.sleep(2000);
+						return null;
+			        }
+				};
+				
+				mySwingWorker.addPropertyChangeListener(new PropertyChangeListener() {
+			        @Override
+			        public void propertyChange(PropertyChangeEvent evt) {
+			            if (evt.getPropertyName().equals("state")) {
+			               if (evt.getNewValue() == SwingWorker.StateValue.DONE) {
+			            	   window.frame.setVisible(false);
+							   window.frame.dispose();
+							   
+							   PageAuth auth = new PageAuth();
+							   auth.frame.setVisible(true);
+			               }
+			            }
+			        }
+			    });
+			    mySwingWorker.execute();
 			}
 		});
 	}
