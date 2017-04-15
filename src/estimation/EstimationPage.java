@@ -26,6 +26,8 @@ import javax.swing.JDialog;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.Calendar;
+import java.util.Date;
 import java.awt.event.ActionEvent;
 
 public class EstimationPage {
@@ -80,6 +82,18 @@ public class EstimationPage {
 							InfoEstimation.fetchData(i);
 							ResultController.result[i] = Math.ceil(ProcEstimation.calculateEstimation());
 						}
+			        	Date d = new Date();
+						Calendar cal = Calendar.getInstance();
+			            cal.setTime(d);
+			            cal.add(Calendar.DATE, 1);
+			            d = cal.getTime();
+			            
+			            if (!InfoEstimation.alreadyInDatabase(d)) {
+				        	InfoEstimation.addToDatabase(0, d, (int) ResultController.result[1], 
+				        			(int) ResultController.result[2], (int) ResultController.result[3], 
+				        			(int) ResultController.result[4], (int) ResultController.result[5]);
+			            }
+			        	
 						/* Invoke Result Page */
 						ResultPage.launch();
 						frame.setVisible(false);
